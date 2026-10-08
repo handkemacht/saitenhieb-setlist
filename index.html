@@ -4,10 +4,75 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="color-scheme" content="dark light" />
+    <meta name="description" content="Setlist-Generator für die Coverband Saitenhieb." />
     <title>Saitenhieb · Setlist</title>
+    <link rel="stylesheet" href="/src/styles.css" />
   </head>
   <body>
-    <main id="app">Lädt …</main>
+    <div id="app">
+      <header>
+        <h1>
+          Saitenhieb
+          <small id="source">Setlist aus der Gig-Historie</small>
+        </h1>
+
+        <div class="targets" id="targets" role="group" aria-label="Spielzeit"></div>
+
+        <div class="actions">
+          <button type="button" id="generate" class="primary">Generieren</button>
+          <button type="button" id="reroll">Neu würfeln</button>
+        </div>
+
+        <details class="settings">
+          <summary>Einstellungen</summary>
+          <div class="setting">
+            <label for="buffer">Puffer pro Song <b id="buffer-value">30 s</b></label>
+            <input type="range" id="buffer" min="0" max="90" step="5" value="30" />
+            <p>Umbauen, Ansagen, Trinken. Zählt zur Spielzeit, nicht zur Songzeit.</p>
+
+            <label for="halflife">Halbwertszeit <b id="halflife-value">12 Monate</b></label>
+            <input type="range" id="halflife" min="3" max="36" step="1" value="12" />
+            <p id="halflife-hint">
+              Wie schnell alte Gigs an Gewicht verlieren. Kurz = nur die letzten Monate zählen.
+            </p>
+          </div>
+        </details>
+      </header>
+
+      <p class="print-head" id="print-head"></p>
+
+      <ol class="setlist" id="list"></ol>
+      <div id="append"></div>
+
+      <section class="blocked" id="blocked" hidden>
+        <h2>Rausgekickt – tippen, um wieder zuzulassen</h2>
+        <div class="chips" id="blocked-chips"></div>
+      </section>
+    </div>
+
+    <footer>
+      <div class="inner">
+        <div class="clock" id="clock">
+          <div>
+            <span class="big" id="clock-total">–</span>
+            <span class="hint" id="clock-detail"></span>
+          </div>
+          <div class="goal">
+            <span class="hint" id="clock-goal"></span>
+            <span class="delta" id="clock-delta"></span>
+          </div>
+        </div>
+        <div class="exports">
+          <button type="button" id="copy">Text</button>
+          <button type="button" id="forscore">forScore</button>
+          <button type="button" id="share">Link</button>
+          <button type="button" id="print">Drucken</button>
+        </div>
+      </div>
+    </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

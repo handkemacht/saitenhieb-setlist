@@ -6,6 +6,8 @@ export default defineConfig({
   base: '/saitenhieb-setlist/',
   build: { target: 'es2020' },
   test: {
+    // The logic is DOM-free; only tests/export.test.ts opts into happy-dom,
+    // because checking that the .4ss is valid XML wants a real parser.
     environment: 'node',
     include: ['tests/**/*.test.ts'],
   },
