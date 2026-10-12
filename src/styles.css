@@ -547,13 +547,14 @@ footer .inner {
 
 .exports {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 6px;
+  /* Five export buttons have to share a phone's width in one row. */
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
 }
 
 .exports button {
-  padding: 0 0.25rem;
-  font-size: 0.85rem;
+  padding: 0 0.15rem;
+  font-size: 0.8rem;
 }
 
 /* --- sheet --------------------------------------------------------------- */
