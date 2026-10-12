@@ -1,6 +1,29 @@
 {
- "generated": "2026-10-08",
+ "generated": "2026-10-11",
  "source": "Backup_2026-10-08.4sb",
+ "roster": "roster.csv",
+ "members": [
+  {
+   "id": "dave",
+   "name": "Dave"
+  },
+  {
+   "id": "martin",
+   "name": "Martin"
+  },
+  {
+   "id": "torsten",
+   "name": "Torsten"
+  },
+  {
+   "id": "peter",
+   "name": "Peter"
+  },
+  {
+   "id": "markus",
+   "name": "Markus"
+  }
+ ],
  "songs": [
   {
    "id": "ABBA - Waterloo",
@@ -8,7 +31,9 @@
    "title": "Waterloo",
    "artist": "ABBA",
    "duration": 166,
-   "plays": 1
+   "plays": 1,
+   "active": true,
+   "roles": null
   },
   {
    "id": "ACDC - Highway to Hell",
@@ -16,7 +41,54 @@
    "title": "Highway to Hell",
    "artist": "ACDC",
    "duration": 208,
-   "plays": 51
+   "plays": 51,
+   "active": true,
+   "roles": {
+    "dave": "G(B)",
+    "martin": "G",
+    "torsten": "V",
+    "peter": "G",
+    "markus": "B"
+   }
+  },
+  {
+   "id": "Alex Clare - Too Close",
+   "file": "",
+   "title": "Too Close",
+   "artist": "Alex Clare",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "martin": "GV",
+    "torsten": "V"
+   }
+  },
+  {
+   "id": "Alicia Keys - Empire State of Mind",
+   "file": "",
+   "title": "Empire State of Mind",
+   "artist": "Alicia Keys",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G(V)"
+   }
+  },
+  {
+   "id": "Alphaville - Big in Japan",
+   "file": "",
+   "title": "Big in Japan",
+   "artist": "Alphaville",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "torsten": "V"
+   }
   },
   {
    "id": "Andreas Bourani – Auf uns",
@@ -24,7 +96,14 @@
    "title": "Auf uns",
    "artist": "Andreas Bourani",
    "duration": 241,
-   "plays": 43
+   "plays": 43,
+   "active": true,
+   "roles": {
+    "dave": "GV(B)",
+    "martin": "G(V)",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "AnnenMayKantereit - Erdbeerkuchen",
@@ -32,7 +111,9 @@
    "title": "Erdbeerkuchen",
    "artist": "AnnenMayKantereit",
    "duration": 164,
-   "plays": 3
+   "plays": 3,
+   "active": true,
+   "roles": null
   },
   {
    "id": "AnnenMayKantereit - Ich geh heut nicht mehr tanzen",
@@ -40,7 +121,9 @@
    "title": "Ich geh heut nicht mehr tanzen",
    "artist": "AnnenMayKantereit",
    "duration": 272,
-   "plays": 2
+   "plays": 2,
+   "active": true,
+   "roles": null
   },
   {
    "id": "Annenmaykantereit - Tommi",
@@ -48,7 +131,14 @@
    "title": "Tommi",
    "artist": "Annenmaykantereit",
    "duration": 269,
-   "plays": 20
+   "plays": 20,
+   "active": true,
+   "roles": {
+    "dave": "G(B)",
+    "martin": "GV",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "Avicii - Wake me up",
@@ -56,7 +146,27 @@
    "title": "Wake me up",
    "artist": "Avicii",
    "duration": 247,
-   "plays": 61
+   "plays": 61,
+   "active": true,
+   "roles": {
+    "dave": "G(V)",
+    "martin": "GV",
+    "peter": "GV",
+    "markus": "B"
+   }
+  },
+  {
+   "id": "Avril Lavigne - Complicated",
+   "file": "",
+   "title": "Complicated",
+   "artist": "Avril Lavigne",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G(V)"
+   }
   },
   {
    "id": "Backstreet Boys - Quit playing games with my heart",
@@ -64,7 +174,15 @@
    "title": "Quit playing games with my heart",
    "artist": "Backstreet Boys",
    "duration": 233,
-   "plays": 20
+   "plays": 20,
+   "active": true,
+   "roles": {
+    "dave": "GV(B)",
+    "martin": "G",
+    "torsten": "V",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "Beastie Boys - Fight For Your Right",
@@ -72,7 +190,27 @@
    "title": "Fight For Your Right",
    "artist": "Beastie Boys",
    "duration": 209,
-   "plays": 8
+   "plays": 8,
+   "active": true,
+   "roles": {
+    "dave": "GV(B)",
+    "martin": "GV",
+    "torsten": "V",
+    "markus": "B"
+   }
+  },
+  {
+   "id": "Beatles - Yesterday",
+   "file": "",
+   "title": "Yesterday",
+   "artist": "Beatles",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G"
+   }
   },
   {
    "id": "Ben E King - Stand By Me 3",
@@ -80,7 +218,13 @@
    "title": "Stand By Me",
    "artist": "Ben E King",
    "duration": 175,
-   "plays": 12
+   "plays": 12,
+   "active": true,
+   "roles": {
+    "dave": "G(V)",
+    "martin": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "Benson Boone - Beautiful Things_C",
@@ -88,7 +232,15 @@
    "title": "Beautiful Things_C",
    "artist": "Benson Boone",
    "duration": 180,
-   "plays": 30
+   "plays": 30,
+   "active": true,
+   "roles": {
+    "dave": "G(B)",
+    "martin": "G(V)",
+    "torsten": "V",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "Bill Haley and His Comets - Rock Around The Clock",
@@ -96,7 +248,26 @@
    "title": "Rock Around The Clock",
    "artist": "Bill Haley and His Comets",
    "duration": 129,
-   "plays": 21
+   "plays": 21,
+   "active": true,
+   "roles": {
+    "dave": "GV(B)",
+    "martin": "G(V)",
+    "peter": "G",
+    "markus": "B"
+   }
+  },
+  {
+   "id": "Bill Withers - Ain't no sunshine",
+   "file": "",
+   "title": "Ain't no sunshine",
+   "artist": "Bill Withers",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "martin": "GV"
+   }
   },
   {
    "id": "Billie Eilish - Bad Guy",
@@ -104,7 +275,15 @@
    "title": "Bad Guy",
    "artist": "Billie Eilish",
    "duration": 194,
-   "plays": 13
+   "plays": 13,
+   "active": true,
+   "roles": {
+    "dave": "G(B)",
+    "martin": "G",
+    "torsten": "V",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "Blink 182 - All The Small Things",
@@ -112,7 +291,15 @@
    "title": "All The Small Things",
    "artist": "Blink 182",
    "duration": 167,
-   "plays": 16
+   "plays": 16,
+   "active": true,
+   "roles": {
+    "dave": "G(B)",
+    "martin": "GV",
+    "torsten": "V",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "Blues Brothers - Everybody Needs Somebody to love",
@@ -120,7 +307,29 @@
    "title": "Everybody Needs Somebody to love",
    "artist": "Blues Brothers",
    "duration": 203,
-   "plays": 28
+   "plays": 28,
+   "active": true,
+   "roles": {
+    "dave": "G(B)",
+    "martin": "G",
+    "torsten": "V",
+    "peter": "G",
+    "markus": "B"
+   }
+  },
+  {
+   "id": "Blur - Song 2",
+   "file": "",
+   "title": "Song 2",
+   "artist": "Blur",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "G",
+    "martin": "G",
+    "torsten": "V"
+   }
   },
   {
    "id": "Bob Dylan - Knockin on Heavens Door",
@@ -128,7 +337,13 @@
    "title": "Knockin on Heavens Door",
    "artist": "Bob Dylan",
    "duration": 336,
-   "plays": 3
+   "plays": 3,
+   "active": false,
+   "roles": {
+    "dave": "G",
+    "martin": "GV",
+    "torsten": "V"
+   }
   },
   {
    "id": "Bob Marley - No Woman No Cry",
@@ -136,7 +351,15 @@
    "title": "No Woman No Cry",
    "artist": "Bob Marley",
    "duration": 226,
-   "plays": 24
+   "plays": 24,
+   "active": true,
+   "roles": {
+    "dave": "G(V)",
+    "martin": "G(V)",
+    "torsten": "V",
+    "peter": "G(V)",
+    "markus": "B"
+   }
   },
   {
    "id": "Britney Spears - Hit me baby one more time",
@@ -144,7 +367,14 @@
    "title": "Hit me baby one more time",
    "artist": "Britney Spears",
    "duration": 211,
-   "plays": 53
+   "plays": 53,
+   "active": true,
+   "roles": {
+    "dave": "GV(B)",
+    "martin": "G",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "Bruno Mars - Locked Out Of Heaven",
@@ -152,7 +382,27 @@
    "title": "Locked Out Of Heaven",
    "artist": "Bruno Mars",
    "duration": 233,
-   "plays": 45
+   "plays": 45,
+   "active": true,
+   "roles": {
+    "dave": "GV(B)",
+    "martin": "G",
+    "peter": "GV",
+    "markus": "B"
+   }
+  },
+  {
+   "id": "Capital Cities - Safe and Sound",
+   "file": "",
+   "title": "Safe and Sound",
+   "artist": "Capital Cities",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G"
+   }
   },
   {
    "id": "Celine Dion - My Heart Will Go on",
@@ -160,7 +410,9 @@
    "title": "My Heart Will Go on",
    "artist": "Celine Dion",
    "duration": 280,
-   "plays": 10
+   "plays": 10,
+   "active": true,
+   "roles": null
   },
   {
    "id": "Cheap Trick - I Want You To Want Me",
@@ -168,7 +420,52 @@
    "title": "I Want You To Want Me",
    "artist": "Cheap Trick",
    "duration": 192,
-   "plays": 19
+   "plays": 19,
+   "active": false,
+   "roles": {
+    "dave": "G(V)",
+    "martin": "GV"
+   }
+  },
+  {
+   "id": "Christina Aguilera - Genie in a bottle",
+   "file": "",
+   "title": "Genie in a bottle",
+   "artist": "Christina Aguilera",
+   "duration": null,
+   "plays": 0,
+   "active": true,
+   "roles": {
+    "dave": "GV(B)",
+    "martin": "G(V)",
+    "peter": "G"
+   }
+  },
+  {
+   "id": "Cindy Lauper (Eva Cassidy Style) - Time after time",
+   "file": "",
+   "title": "Time after time",
+   "artist": "Cindy Lauper (Eva Cassidy Style)",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G(V)"
+   }
+  },
+  {
+   "id": "Coldplay - Fix You",
+   "file": "",
+   "title": "Fix You",
+   "artist": "Coldplay",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "torsten": "V"
+   }
   },
   {
    "id": "Coldplay - Something Just Like This",
@@ -176,7 +473,24 @@
    "title": "Something Just Like This",
    "artist": "Coldplay",
    "duration": 247,
-   "plays": 4
+   "plays": 4,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G"
+   }
+  },
+  {
+   "id": "Coldplay - The Scientist",
+   "file": "",
+   "title": "The Scientist",
+   "artist": "Coldplay",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "martin": "GV"
+   }
   },
   {
    "id": "Coldplay - Viva La Vida",
@@ -184,7 +498,14 @@
    "title": "Viva La Vida",
    "artist": "Coldplay",
    "duration": 242,
-   "plays": 23
+   "plays": 23,
+   "active": true,
+   "roles": {
+    "dave": "GV(B)",
+    "martin": "G",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "Counting Crows - Mr. Jones",
@@ -192,7 +513,14 @@
    "title": "Mr. Jones",
    "artist": "Counting Crows",
    "duration": 272,
-   "plays": 13
+   "plays": 13,
+   "active": true,
+   "roles": {
+    "dave": "GV(B)",
+    "martin": "G",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "Crowded House - Weather with You",
@@ -200,7 +528,9 @@
    "title": "Weather with You",
    "artist": "Crowded House",
    "duration": 224,
-   "plays": 3
+   "plays": 3,
+   "active": true,
+   "roles": null
   },
   {
    "id": "Deep Blue Something - Breakfast at Tiffanys 2",
@@ -208,7 +538,15 @@
    "title": "Breakfast at Tiffanys 2",
    "artist": "Deep Blue Something",
    "duration": 257,
-   "plays": 16
+   "plays": 16,
+   "active": true,
+   "roles": {
+    "dave": "G(V)",
+    "martin": "G(V)",
+    "torsten": "V",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "Die Ärzte - Junge",
@@ -216,7 +554,15 @@
    "title": "Junge",
    "artist": "Die Ärzte",
    "duration": 188,
-   "plays": 30
+   "plays": 30,
+   "active": true,
+   "roles": {
+    "dave": "G(B)",
+    "martin": "GV",
+    "torsten": "V",
+    "peter": "G",
+    "markus": "B"
+   }
   },
   {
    "id": "Die Ärzte - Schrei nach Liebe",
@@ -224,7 +570,15 @@
    "title": "Schrei nach Liebe",
    "artist": "Die Ärzte",
    "duration": 253,
-   "plays": 14
+   "plays": 14,
+   "active": true,
+   "roles": {
+    "dave": "G(B)",
+    "martin": "GV",
+    "torsten": "V",
+    "peter": "G",
+    "markus": "B"
+   }
   },
   {
    "id": "Die Ärzte - Westerland",
@@ -232,7 +586,15 @@
    "title": "Westerland",
    "artist": "Die Ärzte",
    "duration": 221,
-   "plays": 29
+   "plays": 29,
+   "active": true,
+   "roles": {
+    "dave": "G(B)",
+    "martin": "GV",
+    "torsten": "V",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "Die Toten Hosen - An Tagen wie diesen",
@@ -240,7 +602,15 @@
    "title": "An Tagen wie diesen",
    "artist": "Die Toten Hosen",
    "duration": 268,
-   "plays": 4
+   "plays": 4,
+   "active": true,
+   "roles": {
+    "dave": "G(B)",
+    "martin": "GV",
+    "torsten": "V",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "Die toten Hosen - Hier kommt Alex",
@@ -248,7 +618,28 @@
    "title": "Hier kommt Alex",
    "artist": "Die toten Hosen",
    "duration": 234,
-   "plays": 15
+   "plays": 15,
+   "active": true,
+   "roles": {
+    "dave": "G(B)",
+    "martin": "GV",
+    "torsten": "V",
+    "markus": "B"
+   }
+  },
+  {
+   "id": "Dieter Thomas Kuhn - Sag mir quando, sag mir wann",
+   "file": "",
+   "title": "Sag mir quando, sag mir wann",
+   "artist": "Dieter Thomas Kuhn",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G",
+    "torsten": "V"
+   }
   },
   {
    "id": "Don Henley - The Boys of Summer",
@@ -256,7 +647,27 @@
    "title": "The Boys of Summer",
    "artist": "Don Henley",
    "duration": 288,
-   "plays": 41
+   "plays": 41,
+   "active": true,
+   "roles": {
+    "dave": "G(B)",
+    "martin": "GV",
+    "peter": "GV",
+    "markus": "B"
+   }
+  },
+  {
+   "id": "Eagle Eye Cherry - Falling in love",
+   "file": "",
+   "title": "Falling in love",
+   "artist": "Eagle Eye Cherry",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "G(V)",
+    "martin": "GV"
+   }
   },
   {
    "id": "Eagle-Eye Cherry - Save Tonight",
@@ -264,7 +675,14 @@
    "title": "Save Tonight",
    "artist": "Eagle-Eye Cherry",
    "duration": 240,
-   "plays": 23
+   "plays": 23,
+   "active": true,
+   "roles": {
+    "dave": "GV(B)",
+    "martin": "GV",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "Ed Sheeran - Afterglow",
@@ -272,7 +690,13 @@
    "title": "Afterglow",
    "artist": "Ed Sheeran",
    "duration": 185,
-   "plays": 4
+   "plays": 4,
+   "active": true,
+   "roles": {
+    "dave": "GV(B)",
+    "martin": "G(V)",
+    "peter": "GV"
+   }
   },
   {
    "id": "Ed Sheeran - Galway Girl",
@@ -280,7 +704,14 @@
    "title": "Galway Girl",
    "artist": "Ed Sheeran",
    "duration": 170,
-   "plays": 56
+   "plays": 56,
+   "active": true,
+   "roles": {
+    "dave": "G(B)",
+    "martin": "GV",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "Ed Sheeran - Shape Of You",
@@ -288,7 +719,37 @@
    "title": "Shape Of You",
    "artist": "Ed Sheeran",
    "duration": 234,
-   "plays": 6
+   "plays": 6,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G"
+   }
+  },
+  {
+   "id": "Edward Sharpe - Home",
+   "file": "",
+   "title": "Home",
+   "artist": "Edward Sharpe",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "torsten": "V"
+   }
+  },
+  {
+   "id": "Elton John - Can you feel the love tonight",
+   "file": "",
+   "title": "Can you feel the love tonight",
+   "artist": "Elton John",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV"
+   }
   },
   {
    "id": "Elvis Presley – Blue Suede Shoes",
@@ -296,7 +757,42 @@
    "title": "Blue Suede Shoes",
    "artist": "Elvis Presley",
    "duration": 150,
-   "plays": 38
+   "plays": 38,
+   "active": true,
+   "roles": {
+    "dave": "G(V)",
+    "martin": "GV",
+    "peter": "GV",
+    "markus": "B"
+   }
+  },
+  {
+   "id": "Eric Clapton - Layla",
+   "file": "",
+   "title": "Layla",
+   "artist": "Eric Clapton",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "G(V)",
+    "martin": "GV",
+    "torsten": "V"
+   }
+  },
+  {
+   "id": "Extreme - More than words",
+   "file": "",
+   "title": "More than words",
+   "artist": "Extreme",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "G",
+    "martin": "G",
+    "torsten": "V"
+   }
   },
   {
    "id": "Faith No More - Easy",
@@ -304,7 +800,13 @@
    "title": "Easy",
    "artist": "Faith No More",
    "duration": 189,
-   "plays": 8
+   "plays": 8,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "GV",
+    "torsten": "V"
+   }
   },
   {
    "id": "Foo Fighters - Everlong",
@@ -312,7 +814,9 @@
    "title": "Everlong",
    "artist": "Foo Fighters",
    "duration": null,
-   "plays": 1
+   "plays": 1,
+   "active": true,
+   "roles": null
   },
   {
    "id": "George Ezra - Blame it on Me",
@@ -320,7 +824,14 @@
    "title": "Blame it on Me",
    "artist": "George Ezra",
    "duration": 196,
-   "plays": 55
+   "plays": 55,
+   "active": true,
+   "roles": {
+    "dave": "G(V)",
+    "martin": "GV",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "George Michael - Faith",
@@ -328,7 +839,27 @@
    "title": "Faith",
    "artist": "George Michael",
    "duration": 193,
-   "plays": 47
+   "plays": 47,
+   "active": true,
+   "roles": {
+    "dave": "GV(B)",
+    "martin": "G(V)",
+    "peter": "GV",
+    "markus": "B"
+   }
+  },
+  {
+   "id": "Glen Hansard - Falling slowly",
+   "file": "",
+   "title": "Falling slowly",
+   "artist": "Glen Hansard",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G(V)"
+   }
   },
   {
    "id": "Green Day - Basket Case",
@@ -336,7 +867,14 @@
    "title": "Basket Case",
    "artist": "Green Day",
    "duration": 240,
-   "plays": 54
+   "plays": 54,
+   "active": true,
+   "roles": {
+    "dave": "GV(B)",
+    "martin": "G(V)",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "Green Day - Good Riddance",
@@ -344,7 +882,26 @@
    "title": "Good Riddance",
    "artist": "Green Day",
    "duration": 155,
-   "plays": 6
+   "plays": 6,
+   "active": false,
+   "roles": {
+    "dave": "G(V)",
+    "martin": "GV"
+   }
+  },
+  {
+   "id": "Guns 'n Roses - Paradise City",
+   "file": "",
+   "title": "Paradise City",
+   "artist": "Guns 'n Roses",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "G",
+    "martin": "G",
+    "torsten": "V"
+   }
   },
   {
    "id": "Haddaway - What is love",
@@ -352,7 +909,15 @@
    "title": "What is love",
    "artist": "Haddaway",
    "duration": 270,
-   "plays": 46
+   "plays": 46,
+   "active": true,
+   "roles": {
+    "dave": "G(B)",
+    "martin": "G",
+    "torsten": "V",
+    "peter": "G",
+    "markus": "B"
+   }
   },
   {
    "id": "Hecht - Charlotta",
@@ -360,7 +925,35 @@
    "title": "Charlotta",
    "artist": "Hecht",
    "duration": 220,
-   "plays": 1
+   "plays": 1,
+   "active": true,
+   "roles": null
+  },
+  {
+   "id": "Herbert Grönemeyer - Männer",
+   "file": "",
+   "title": "Männer",
+   "artist": "Herbert Grönemeyer",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "G(V)",
+    "martin": "GV"
+   }
+  },
+  {
+   "id": "INXS - Mystify",
+   "file": "",
+   "title": "Mystify",
+   "artist": "INXS",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G"
+   }
   },
   {
    "id": "Icona Pop - I love it",
@@ -368,7 +961,14 @@
    "title": "I love it",
    "artist": "Icona Pop",
    "duration": 157,
-   "plays": 39
+   "plays": 39,
+   "active": true,
+   "roles": {
+    "dave": "GV(B)",
+    "martin": "GV",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "Imany - Don't be shy",
@@ -376,7 +976,27 @@
    "title": "Don't be shy",
    "artist": "Imany",
    "duration": 192,
-   "plays": 13
+   "plays": 13,
+   "active": false,
+   "roles": {
+    "dave": "G",
+    "martin": "GV",
+    "torsten": "V"
+   }
+  },
+  {
+   "id": "Incubus - Drive",
+   "file": "",
+   "title": "Drive",
+   "artist": "Incubus",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G",
+    "torsten": "V"
+   }
   },
   {
    "id": "Jack Johnson - Taylor",
@@ -384,7 +1004,24 @@
    "title": "Taylor",
    "artist": "Jack Johnson",
    "duration": 239,
-   "plays": 1
+   "plays": 1,
+   "active": false,
+   "roles": {
+    "dave": "G(V)",
+    "martin": "GV"
+   }
+  },
+  {
+   "id": "James Bay - Hold back the River",
+   "file": "",
+   "title": "Hold back the River",
+   "artist": "James Bay",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV"
+   }
   },
   {
    "id": "Jason Mraz - I'm Yours",
@@ -392,7 +1029,40 @@
    "title": "I'm Yours",
    "artist": "Jason Mraz",
    "duration": 243,
-   "plays": 40
+   "plays": 40,
+   "active": true,
+   "roles": {
+    "dave": "G(B)",
+    "martin": "GV",
+    "peter": "GV",
+    "markus": "B"
+   }
+  },
+  {
+   "id": "Jimmy Eat World - Hear you me",
+   "file": "",
+   "title": "Hear you me",
+   "artist": "Jimmy Eat World",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G(V)"
+   }
+  },
+  {
+   "id": "Joan Osbourne - One of us",
+   "file": "",
+   "title": "One of us",
+   "artist": "Joan Osbourne",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G"
+   }
   },
   {
    "id": "Joel Corry - Head and Heart",
@@ -400,7 +1070,35 @@
    "title": "Head and Heart",
    "artist": "Joel Corry",
    "duration": 166,
-   "plays": 0
+   "plays": 0,
+   "active": true,
+   "roles": null
+  },
+  {
+   "id": "John Denver - Annies Song",
+   "file": "",
+   "title": "Annies Song",
+   "artist": "John Denver",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G"
+   }
+  },
+  {
+   "id": "John Legend - All of me",
+   "file": "",
+   "title": "All of me",
+   "artist": "John Legend",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "GV"
+   }
   },
   {
    "id": "Jon Bon Jovi - Living on a prayer 3",
@@ -408,7 +1106,64 @@
    "title": "Living on a prayer",
    "artist": "Jon Bon Jovi",
    "duration": 249,
-   "plays": 12
+   "plays": 12,
+   "active": true,
+   "roles": {
+    "dave": "G(B)",
+    "martin": "GV",
+    "peter": "G",
+    "markus": "B"
+   }
+  },
+  {
+   "id": "José Gonzalez - Heartbeats",
+   "file": "",
+   "title": "Heartbeats",
+   "artist": "José Gonzalez",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "G",
+    "torsten": "V"
+   }
+  },
+  {
+   "id": "Juli - Wir beide",
+   "file": "",
+   "title": "Wir beide",
+   "artist": "Juli",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "martin": "GV"
+   }
+  },
+  {
+   "id": "Justin Bieber - Love yourself",
+   "file": "",
+   "title": "Love yourself",
+   "artist": "Justin Bieber",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G"
+   }
+  },
+  {
+   "id": "Justin Timberlake - Can't Stop The Feelin'",
+   "file": "",
+   "title": "Can't Stop The Feelin'",
+   "artist": "Justin Timberlake",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV"
+   }
   },
   {
    "id": "Katrina and the Waves - Walking on Sunshine",
@@ -416,7 +1171,14 @@
    "title": "Walking on Sunshine",
    "artist": "Katrina and the Waves",
    "duration": 239,
-   "plays": 11
+   "plays": 11,
+   "active": true,
+   "roles": {
+    "dave": "GV(B)",
+    "martin": "G",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "Katy Perry - I kissed a Girl",
@@ -424,7 +1186,27 @@
    "title": "I kissed a Girl",
    "artist": "Katy Perry",
    "duration": 180,
-   "plays": 11
+   "plays": 11,
+   "active": true,
+   "roles": {
+    "dave": "GV(B)",
+    "martin": "G",
+    "peter": "G",
+    "markus": "B"
+   }
+  },
+  {
+   "id": "Kings of Leon - Use Somebody",
+   "file": "",
+   "title": "Use Somebody",
+   "artist": "Kings of Leon",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G"
+   }
   },
   {
    "id": "Kiss - I was made for loving you",
@@ -432,7 +1214,40 @@
    "title": "I was made for loving you",
    "artist": "Kiss",
    "duration": 271,
-   "plays": 12
+   "plays": 12,
+   "active": false,
+   "roles": {
+    "dave": "G",
+    "martin": "G",
+    "torsten": "V"
+   }
+  },
+  {
+   "id": "Lady Gaga, Bradley Cooper (A Star Is Born) - Shallow",
+   "file": "",
+   "title": "Shallow",
+   "artist": "Lady Gaga, Bradley Cooper (A Star Is Born)",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "G",
+    "martin": "GV",
+    "torsten": "V"
+   }
+  },
+  {
+   "id": "Lenny Kravitz - Believe in me",
+   "file": "",
+   "title": "Believe in me",
+   "artist": "Lenny Kravitz",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G(V)"
+   }
   },
   {
    "id": "Lenny Kravitz - Fly Away",
@@ -440,7 +1255,15 @@
    "title": "Fly Away",
    "artist": "Lenny Kravitz",
    "duration": 300,
-   "plays": 54
+   "plays": 54,
+   "active": true,
+   "roles": {
+    "dave": "GV(B)",
+    "martin": "G(V)",
+    "torsten": "V",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "Leonard Cohen - Hallelujah",
@@ -448,7 +1271,12 @@
    "title": "Hallelujah",
    "artist": "Leonard Cohen",
    "duration": 279,
-   "plays": 0
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "GV"
+   }
   },
   {
    "id": "Lil Nas X - That's What I Want",
@@ -456,7 +1284,9 @@
    "title": "That's What I Want",
    "artist": "Lil Nas X",
    "duration": 144,
-   "plays": 3
+   "plays": 3,
+   "active": true,
+   "roles": null
   },
   {
    "id": "Lynyrd Skynyrd - Sweet Home Alabama",
@@ -464,7 +1294,40 @@
    "title": "Sweet Home Alabama",
    "artist": "Lynyrd Skynyrd",
    "duration": 284,
-   "plays": 7
+   "plays": 7,
+   "active": false,
+   "roles": {
+    "dave": "G",
+    "martin": "GV",
+    "torsten": "(V)"
+   }
+  },
+  {
+   "id": "Metallica - Nothing else matters",
+   "file": "",
+   "title": "Nothing else matters",
+   "artist": "Metallica",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "G",
+    "martin": "GV",
+    "torsten": "V"
+   }
+  },
+  {
+   "id": "Midge Ure - Breathe",
+   "file": "",
+   "title": "Breathe",
+   "artist": "Midge Ure",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G"
+   }
   },
   {
    "id": "Miley Cyrus - Flowers",
@@ -472,7 +1335,15 @@
    "title": "Flowers",
    "artist": "Miley Cyrus",
    "duration": 200,
-   "plays": 54
+   "plays": 54,
+   "active": true,
+   "roles": {
+    "dave": "G(B)",
+    "martin": "GV",
+    "torsten": "V",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "Milky Chance - Colorado",
@@ -480,7 +1351,50 @@
    "title": "Colorado",
    "artist": "Milky Chance",
    "duration": 174,
-   "plays": 0
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G(V)"
+   }
+  },
+  {
+   "id": "Milow - You and me",
+   "file": "",
+   "title": "You and me",
+   "artist": "Milow",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "martin": "GV"
+   }
+  },
+  {
+   "id": "Milow - You don't know",
+   "file": "",
+   "title": "You don't know",
+   "artist": "Milow",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "martin": "GV"
+   }
+  },
+  {
+   "id": "Mischung aus Gavin James und Daft Punk - Get Lucky",
+   "file": "",
+   "title": "Get Lucky",
+   "artist": "Mischung aus Gavin James und Daft Punk",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G",
+    "torsten": "V"
+   }
   },
   {
    "id": "Modern Talking - You're my heart",
@@ -488,7 +1402,12 @@
    "title": "You're my heart",
    "artist": "Modern Talking",
    "duration": 230,
-   "plays": 1
+   "plays": 1,
+   "active": false,
+   "roles": {
+    "dave": "GV yomaha",
+    "martin": "G"
+   }
   },
   {
    "id": "Mumford and Sons - I will wait",
@@ -496,7 +1415,27 @@
    "title": "I will wait",
    "artist": "Mumford and Sons",
    "duration": 276,
-   "plays": 54
+   "plays": 54,
+   "active": true,
+   "roles": {
+    "dave": "GV(B)",
+    "martin": "G(V)",
+    "peter": "GV",
+    "markus": "B"
+   }
+  },
+  {
+   "id": "Mungo Jerry - In the Summertime",
+   "file": "",
+   "title": "In the Summertime",
+   "artist": "Mungo Jerry",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G"
+   }
   },
   {
    "id": "Münchener Freiheit - Ohne dich",
@@ -504,7 +1443,14 @@
    "title": "Ohne dich",
    "artist": "Münchener Freiheit",
    "duration": 247,
-   "plays": 18
+   "plays": 18,
+   "active": true,
+   "roles": {
+    "dave": "G(V)",
+    "martin": "GV",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "Oasis - Don't Look Back in Anger",
@@ -512,7 +1458,14 @@
    "title": "Don't Look Back in Anger",
    "artist": "Oasis",
    "duration": 287,
-   "plays": 46
+   "plays": 46,
+   "active": true,
+   "roles": {
+    "dave": "G(V)",
+    "martin": "GV",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "Oasis - Wonderwall",
@@ -520,7 +1473,14 @@
    "title": "Wonderwall",
    "artist": "Oasis",
    "duration": 259,
-   "plays": 39
+   "plays": 39,
+   "active": true,
+   "roles": {
+    "dave": "GV(B)",
+    "martin": "GV",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "Outkast - Hey Ya",
@@ -528,7 +1488,15 @@
    "title": "Hey Ya",
    "artist": "Outkast",
    "duration": 300,
-   "plays": 50
+   "plays": 50,
+   "active": true,
+   "roles": {
+    "dave": "GV(B)",
+    "martin": "G(V)",
+    "torsten": "V",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "Owl City - Fireflies",
@@ -536,7 +1504,12 @@
    "title": "Fireflies",
    "artist": "Owl City",
    "duration": 228,
-   "plays": 0
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G(V)"
+   }
   },
   {
    "id": "Papa Roach - Last Resort",
@@ -544,7 +1517,13 @@
    "title": "Last Resort",
    "artist": "Papa Roach",
    "duration": 200,
-   "plays": 0
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "G",
+    "martin": "G",
+    "torsten": "V"
+   }
   },
   {
    "id": "Passenger - Let Her Go",
@@ -552,7 +1531,40 @@
    "title": "Let Her Go",
    "artist": "Passenger",
    "duration": 253,
-   "plays": 12
+   "plays": 12,
+   "active": true,
+   "roles": {
+    "dave": "G(V)",
+    "martin": "GV",
+    "peter": "GV",
+    "markus": "B"
+   }
+  },
+  {
+   "id": "Pink Floyd - Wish you were here",
+   "file": "",
+   "title": "Wish you were here",
+   "artist": "Pink Floyd",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "G",
+    "martin": "GV"
+   }
+  },
+  {
+   "id": "Plain White Ts - Delilah",
+   "file": "",
+   "title": "Delilah",
+   "artist": "Plain White Ts",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G"
+   }
   },
   {
    "id": "REM - It's The End Of The World",
@@ -560,7 +1572,9 @@
    "title": "It's The End Of The World",
    "artist": "REM",
    "duration": 247,
-   "plays": 1
+   "plays": 1,
+   "active": true,
+   "roles": null
   },
   {
    "id": "REM - Losing my Religion",
@@ -568,7 +1582,14 @@
    "title": "Losing my Religion",
    "artist": "REM",
    "duration": 268,
-   "plays": 6
+   "plays": 6,
+   "active": true,
+   "roles": {
+    "dave": "GV(B)",
+    "martin": "G(V)",
+    "torsten": "V",
+    "markus": "B"
+   }
   },
   {
    "id": "Radiohead – Creep",
@@ -576,7 +1597,9 @@
    "title": "Creep",
    "artist": "Radiohead",
    "duration": 239,
-   "plays": 2
+   "plays": 2,
+   "active": true,
+   "roles": null
   },
   {
    "id": "Reamonn - Supergirl",
@@ -584,7 +1607,12 @@
    "title": "Supergirl",
    "artist": "Reamonn",
    "duration": 246,
-   "plays": 1
+   "plays": 1,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G(V)"
+   }
   },
   {
    "id": "Red Hot Chili Peppers - Can‘t stop",
@@ -592,7 +1620,9 @@
    "title": "Can‘t stop",
    "artist": "Red Hot Chili Peppers",
    "duration": 267,
-   "plays": 3
+   "plays": 3,
+   "active": true,
+   "roles": null
   },
   {
    "id": "Rihanna - Umbrella",
@@ -600,7 +1630,14 @@
    "title": "Umbrella",
    "artist": "Rihanna",
    "duration": 276,
-   "plays": 15
+   "plays": 15,
+   "active": true,
+   "roles": {
+    "dave": "GV(B)",
+    "martin": "G(V)",
+    "peter": "G",
+    "markus": "B"
+   }
   },
   {
    "id": "Ritchie Valens - La Bamba",
@@ -608,7 +1645,15 @@
    "title": "La Bamba",
    "artist": "Ritchie Valens",
    "duration": 129,
-   "plays": 5
+   "plays": 5,
+   "active": true,
+   "roles": {
+    "dave": "G(B)",
+    "martin": "G(V)",
+    "torsten": "V",
+    "peter": "G",
+    "markus": "B"
+   }
   },
   {
    "id": "Robbie Williams - Angels",
@@ -616,7 +1661,27 @@
    "title": "Angels",
    "artist": "Robbie Williams",
    "duration": 265,
-   "plays": 54
+   "plays": 54,
+   "active": true,
+   "roles": {
+    "dave": "GV(B)",
+    "martin": "G(V)",
+    "peter": "GV",
+    "markus": "B"
+   }
+  },
+  {
+   "id": "Robbie Williams - Eternity",
+   "file": "",
+   "title": "Eternity",
+   "artist": "Robbie Williams",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "G",
+    "martin": "GV"
+   }
   },
   {
    "id": "Rosé feat. Bruno Mars - Apt",
@@ -624,7 +1689,15 @@
    "title": "Apt",
    "artist": "Rosé feat. Bruno Mars",
    "duration": 169,
-   "plays": 22
+   "plays": 22,
+   "active": true,
+   "roles": {
+    "dave": "G(B)",
+    "martin": "GV",
+    "torsten": "V",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "Roy Bianco & Die Abbrunzanti Boys - Napoli",
@@ -632,7 +1705,28 @@
    "title": "Napoli",
    "artist": "Roy Bianco & Die Abbrunzanti Boys",
    "duration": null,
-   "plays": 4
+   "plays": 4,
+   "active": true,
+   "roles": {
+    "dave": "G(V)",
+    "martin": "G(V)",
+    "torsten": "V",
+    "peter": "GV",
+    "markus": "B"
+   }
+  },
+  {
+   "id": "Sixpence non the richer - Kiss me",
+   "file": "",
+   "title": "Kiss me",
+   "artist": "Sixpence non the richer",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G(V)"
+   }
   },
   {
    "id": "Snow Patrol - Chasing Cars",
@@ -640,7 +1734,15 @@
    "title": "Chasing Cars",
    "artist": "Snow Patrol",
    "duration": 266,
-   "plays": 18
+   "plays": 18,
+   "active": true,
+   "roles": {
+    "dave": "G",
+    "martin": "GV",
+    "torsten": "V",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "Soft Cell - Tainted Love",
@@ -648,7 +1750,15 @@
    "title": "Tainted Love",
    "artist": "Soft Cell",
    "duration": 154,
-   "plays": 13
+   "plays": 13,
+   "active": true,
+   "roles": {
+    "dave": "GV(B)",
+    "martin": "GV",
+    "torsten": "(V)",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "Sportfreunde Stiller - Ein Kompliment",
@@ -656,7 +1766,14 @@
    "title": "Ein Kompliment",
    "artist": "Sportfreunde Stiller",
    "duration": 198,
-   "plays": 58
+   "plays": 58,
+   "active": true,
+   "roles": {
+    "dave": "G(V)",
+    "martin": "GV",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "Sportfreunde Stiller – Applaus Applaus",
@@ -664,7 +1781,12 @@
    "title": "Applaus Applaus",
    "artist": "Sportfreunde Stiller",
    "duration": 209,
-   "plays": 4
+   "plays": 4,
+   "active": false,
+   "roles": {
+    "dave": "G",
+    "martin": "GV"
+   }
   },
   {
    "id": "Steve Miller Band - The Joker",
@@ -672,7 +1794,28 @@
    "title": "The Joker",
    "artist": "Steve Miller Band",
    "duration": 265,
-   "plays": 20
+   "plays": 20,
+   "active": true,
+   "roles": {
+    "dave": "GV(B)",
+    "martin": "GV",
+    "torsten": "V",
+    "peter": "GV",
+    "markus": "B"
+   }
+  },
+  {
+   "id": "Stil zwischen Sting und Eva Cassidy - Fields of gold",
+   "file": "",
+   "title": "Fields of gold",
+   "artist": "Stil zwischen Sting und Eva Cassidy",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G(V)"
+   }
   },
   {
    "id": "Sting - Englishman in New York",
@@ -680,7 +1823,28 @@
    "title": "Englishman in New York",
    "artist": "Sting",
    "duration": 266,
-   "plays": 10
+   "plays": 10,
+   "active": true,
+   "roles": {
+    "dave": "GV(B)",
+    "martin": "G(V)",
+    "torsten": "V",
+    "peter": "G",
+    "markus": "B"
+   }
+  },
+  {
+   "id": "Sting - Shape of my heart",
+   "file": "",
+   "title": "Shape of my heart",
+   "artist": "Sting",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "(G)"
+   }
   },
   {
    "id": "System of a Down - Chop Suey",
@@ -688,7 +1852,13 @@
    "title": "Chop Suey",
    "artist": "System of a Down",
    "duration": 210,
-   "plays": 2
+   "plays": 2,
+   "active": false,
+   "roles": {
+    "dave": "G",
+    "martin": "GV",
+    "torsten": "V"
+   }
   },
   {
    "id": "Taylor Swift - Shake it off",
@@ -696,7 +1866,15 @@
    "title": "Shake it off",
    "artist": "Taylor Swift",
    "duration": 219,
-   "plays": 50
+   "plays": 50,
+   "active": true,
+   "roles": {
+    "dave": "G(B)",
+    "martin": "G(V)",
+    "torsten": "V",
+    "peter": "G(V)",
+    "markus": "B"
+   }
   },
   {
    "id": "Teddy Swims - Bad Dreams",
@@ -704,7 +1882,22 @@
    "title": "Bad Dreams",
    "artist": "Teddy Swims",
    "duration": 185,
-   "plays": 0
+   "plays": 0,
+   "active": true,
+   "roles": null
+  },
+  {
+   "id": "The Animals - House of the rising sun",
+   "file": "",
+   "title": "House of the rising sun",
+   "artist": "The Animals",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "G",
+    "martin": "GV"
+   }
   },
   {
    "id": "The Beach Boys- Surfin USA",
@@ -712,7 +1905,25 @@
    "title": "Surfin USA",
    "artist": "The Beach Boys",
    "duration": 148,
-   "plays": 6
+   "plays": 6,
+   "active": true,
+   "roles": {
+    "dave": "GV",
+    "martin": "G"
+   }
+  },
+  {
+   "id": "The Beatles - Let it be",
+   "file": "",
+   "title": "Let it be",
+   "artist": "The Beatles",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "G(V)",
+    "martin": "GV"
+   }
   },
   {
    "id": "The Beatles - She Loves You",
@@ -720,7 +1931,14 @@
    "title": "She Loves You",
    "artist": "The Beatles",
    "duration": 141,
-   "plays": 17
+   "plays": 17,
+   "active": true,
+   "roles": {
+    "dave": "GV",
+    "martin": "G",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "The Beatles – I Want To Hold Your Hand",
@@ -728,7 +1946,22 @@
    "title": "I Want To Hold Your Hand",
    "artist": "The Beatles",
    "duration": 147,
-   "plays": 0
+   "plays": 0,
+   "active": true,
+   "roles": null
+  },
+  {
+   "id": "The Cardigans - My favourite game",
+   "file": "",
+   "title": "My favourite game",
+   "artist": "The Cardigans",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G"
+   }
   },
   {
    "id": "The Clash - Should I Stay or Should I Go",
@@ -736,7 +1969,53 @@
    "title": "Should I Stay or Should I Go",
    "artist": "The Clash",
    "duration": 188,
-   "plays": 20
+   "plays": 20,
+   "active": true,
+   "roles": {
+    "dave": "G",
+    "martin": "GV",
+    "peter": "GV",
+    "markus": "B"
+   }
+  },
+  {
+   "id": "The Connells - 74, '75",
+   "file": "",
+   "title": "74, '75",
+   "artist": "The Connells",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G(V)"
+   }
+  },
+  {
+   "id": "The Eagles - Hotel California",
+   "file": "",
+   "title": "Hotel California",
+   "artist": "The Eagles",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "G",
+    "martin": "GV"
+   }
+  },
+  {
+   "id": "The Fugees - Killing me softly",
+   "file": "",
+   "title": "Killing me softly",
+   "artist": "The Fugees",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G(V)"
+   }
   },
   {
    "id": "The Killers - Mr. Brightside",
@@ -744,7 +2023,15 @@
    "title": "Mr. Brightside",
    "artist": "The Killers",
    "duration": 222,
-   "plays": 50
+   "plays": 50,
+   "active": true,
+   "roles": {
+    "dave": "G(B)",
+    "martin": "G(V)",
+    "torsten": "(V)",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "The Mamas & The Papas - California Dreamin'",
@@ -752,7 +2039,14 @@
    "title": "California Dreamin'",
    "artist": "The Mamas & The Papas",
    "duration": 162,
-   "plays": 49
+   "plays": 49,
+   "active": true,
+   "roles": {
+    "dave": "GV(B)",
+    "martin": "G(V)",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "The Offspring - Self Esteem",
@@ -760,7 +2054,9 @@
    "title": "Self Esteem",
    "artist": "The Offspring",
    "duration": 258,
-   "plays": 1
+   "plays": 1,
+   "active": true,
+   "roles": null
   },
   {
    "id": "The Police - So Lonely",
@@ -768,7 +2064,14 @@
    "title": "So Lonely",
    "artist": "The Police",
    "duration": 289,
-   "plays": 52
+   "plays": 52,
+   "active": true,
+   "roles": {
+    "dave": "GV(B)",
+    "martin": "G(V)",
+    "peter": "G(V)",
+    "markus": "B"
+   }
   },
   {
    "id": "The Proclaimers - Im Gonna Be (500 Miles)",
@@ -776,7 +2079,15 @@
    "title": "Im Gonna Be (500 Miles)",
    "artist": "The Proclaimers",
    "duration": 219,
-   "plays": 33
+   "plays": 33,
+   "active": true,
+   "roles": {
+    "dave": "G(B)",
+    "martin": "GV",
+    "torsten": "(V)",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "The Rembrandts - I'll Be There For You",
@@ -784,7 +2095,14 @@
    "title": "I'll Be There For You",
    "artist": "The Rembrandts",
    "duration": 188,
-   "plays": 30
+   "plays": 30,
+   "active": true,
+   "roles": {
+    "dave": "GV(B)",
+    "martin": "G(V)",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "The Weekend - Blinding Lights",
@@ -792,7 +2110,36 @@
    "title": "Blinding Lights",
    "artist": "The Weekend",
    "duration": 202,
-   "plays": 3
+   "plays": 3,
+   "active": true,
+   "roles": null
+  },
+  {
+   "id": "Tito & Tarantula - After Dark",
+   "file": "",
+   "title": "After Dark",
+   "artist": "Tito & Tarantula",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "G",
+    "martin": "G",
+    "torsten": "V"
+   }
+  },
+  {
+   "id": "Tom Jones - It's not unusual",
+   "file": "",
+   "title": "It's not unusual",
+   "artist": "Tom Jones",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G"
+   }
   },
   {
    "id": "Tom Petty - Free Fallin",
@@ -800,7 +2147,27 @@
    "title": "Free Fallin",
    "artist": "Tom Petty",
    "duration": 256,
-   "plays": 5
+   "plays": 5,
+   "active": true,
+   "roles": {
+    "dave": "GV(B)",
+    "martin": "G(V)",
+    "peter": "GV",
+    "markus": "B"
+   }
+  },
+  {
+   "id": "Tracy Chapman - Baby can I hold you (Sorry)",
+   "file": "",
+   "title": "Baby can I hold you (Sorry)",
+   "artist": "Tracy Chapman",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G(V)"
+   }
   },
   {
    "id": "Tracy Chapman – Talking about a revolution 2",
@@ -808,7 +2175,12 @@
    "title": "Talking about a revolution 2",
    "artist": "Tracy Chapman",
    "duration": 162,
-   "plays": 1
+   "plays": 1,
+   "active": false,
+   "roles": {
+    "dave": "G",
+    "martin": "GV"
+   }
   },
   {
    "id": "Train - Drops Of Jupiter",
@@ -816,7 +2188,9 @@
    "title": "Drops Of Jupiter",
    "artist": "Train",
    "duration": 257,
-   "plays": 1
+   "plays": 1,
+   "active": true,
+   "roles": null
   },
   {
    "id": "Travis - Sing",
@@ -824,7 +2198,52 @@
    "title": "Sing",
    "artist": "Travis",
    "duration": 229,
-   "plays": 3
+   "plays": 3,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G(V)"
+   }
+  },
+  {
+   "id": "Triggerfinger bzw. Lykke Li - I Follow Rivers",
+   "file": "",
+   "title": "I Follow Rivers",
+   "artist": "Triggerfinger bzw. Lykke Li",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "G",
+    "martin": "GV",
+    "torsten": "V"
+   }
+  },
+  {
+   "id": "U2 - With Or Without You",
+   "file": "",
+   "title": "With Or Without You",
+   "artist": "U2",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G"
+   }
+  },
+  {
+   "id": "U2/Johnny Cash - One",
+   "file": "",
+   "title": "One",
+   "artist": "U2/Johnny Cash",
+   "duration": null,
+   "plays": 0,
+   "active": false,
+   "roles": {
+    "dave": "G",
+    "martin": "GV"
+   }
   },
   {
    "id": "Udo Lindenberg & Apache - Komet",
@@ -832,7 +2251,9 @@
    "title": "Komet",
    "artist": "Udo Lindenberg & Apache",
    "duration": 167,
-   "plays": 3
+   "plays": 3,
+   "active": true,
+   "roles": null
   },
   {
    "id": "Uncle Kracker - Follow Me",
@@ -840,7 +2261,9 @@
    "title": "Follow Me",
    "artist": "Uncle Kracker",
    "duration": 218,
-   "plays": 23
+   "plays": 23,
+   "active": true,
+   "roles": null
   },
   {
    "id": "Wackelkontakt - Oimara",
@@ -848,7 +2271,15 @@
    "title": "Oimara",
    "artist": "Wackelkontakt",
    "duration": 170,
-   "plays": 9
+   "plays": 9,
+   "active": true,
+   "roles": {
+    "dave": "G(B)",
+    "martin": "GV",
+    "torsten": "V",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "Walk the Moon - Shutup and Dance",
@@ -856,7 +2287,14 @@
    "title": "Shutup and Dance",
    "artist": "Walk the Moon",
    "duration": 199,
-   "plays": 47
+   "plays": 47,
+   "active": true,
+   "roles": {
+    "dave": "GV(B)",
+    "martin": "G",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "Wanda - Bologna 3",
@@ -864,7 +2302,9 @@
    "title": "Bologna",
    "artist": "Wanda",
    "duration": 214,
-   "plays": 3
+   "plays": 3,
+   "active": true,
+   "roles": null
   },
   {
    "id": "Westernhagen - Sexy 3",
@@ -872,7 +2312,9 @@
    "title": "Sexy",
    "artist": "Westernhagen",
    "duration": 331,
-   "plays": 2
+   "plays": 2,
+   "active": true,
+   "roles": null
   },
   {
    "id": "Wham - Last Christmas",
@@ -880,7 +2322,12 @@
    "title": "Last Christmas",
    "artist": "Wham",
    "duration": 263,
-   "plays": 4
+   "plays": 4,
+   "active": false,
+   "roles": {
+    "dave": "GV",
+    "martin": "G"
+   }
   },
   {
    "id": "Wheatus - Teenage Dirtbag",
@@ -888,7 +2335,15 @@
    "title": "Teenage Dirtbag",
    "artist": "Wheatus",
    "duration": 241,
-   "plays": 14
+   "plays": 14,
+   "active": true,
+   "roles": {
+    "dave": "G(B)",
+    "martin": "G",
+    "torsten": "V",
+    "peter": "GV",
+    "markus": "B"
+   }
   },
   {
    "id": "White Stripes - Seven Nation Army",
@@ -896,7 +2351,15 @@
    "title": "Seven Nation Army",
    "artist": "White Stripes",
    "duration": 232,
-   "plays": 2
+   "plays": 2,
+   "active": true,
+   "roles": {
+    "dave": "G(B)",
+    "martin": "G",
+    "torsten": "V",
+    "peter": "G",
+    "markus": "B"
+   }
   }
  ],
  "gigs": [

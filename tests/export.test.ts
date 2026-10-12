@@ -10,6 +10,7 @@ import {
   formatTarget,
   headline,
   poolOrder,
+  targetSlug,
   today,
 } from '../src/export'
 import { createContext, entry, generate, type SetlistEntry } from '../src/scorer'
@@ -20,10 +21,16 @@ const list = generate(ctx, { targetSeconds: 7200, bufferSeconds: 30 })
 const meta = { targetSeconds: 7200, bufferSeconds: 30, date: '2026-10-08' }
 
 describe('text export', () => {
-  it('formats the target the German way', () => {
+  it('formats any playing time, not only whole hours', () => {
     expect(formatTarget(3600)).toBe('1 h')
-    expect(formatTarget(5400)).toBe('1,5 h')
     expect(formatTarget(10800)).toBe('3 h')
+    expect(formatTarget(5400)).toBe('1:30 h')
+    expect(formatTarget(5700)).toBe('1:35 h')
+    expect(formatTarget(3900)).toBe('1:05 h')
+    expect(formatTarget(2700)).toBe('45 min')
+    expect(targetSlug(7200)).toBe('2h')
+    expect(targetSlug(5700)).toBe('1h35')
+    expect(targetSlug(2700)).toBe('45min')
   })
 
   it('writes the headline from the real numbers', () => {
@@ -47,10 +54,15 @@ describe('text export', () => {
 
   it('dates the file name', () => {
     expect(forScoreFileName(meta)).toBe('Saitenhieb_2h_2026-10-08.4ss')
-    expect(forScoreFileName({ ...meta, targetSeconds: 5400 })).toBe(
-      'Saitenhieb_1-5h_2026-10-08.4ss',
+    expect(forScoreFileName({ ...meta, targetSeconds: 5700 })).toBe(
+      'Saitenhieb_1h35_2026-10-08.4ss',
     )
     expect(today(new Date(2026, 0, 5))).toBe('2026-01-05')
+  })
+
+  it('names the lineup in the headline only when somebody is missing', () => {
+    expect(headline(list, meta)).not.toContain('Dave')
+    expect(headline(list, { ...meta, lineup: ['Dave', 'Martin'] })).toMatch(/· Dave, Martin$/)
   })
 })
 
@@ -64,7 +76,7 @@ describe('forScore setlist', () => {
     expect(root.tagName).toBe('forScore')
     expect(root.getAttribute('kind')).toBe('setlist')
     expect(root.getAttribute('version')).toBe('1.0')
-    expect(root.getAttribute('title')).toBe('Saitenhieb 2 h 2026-10-08')
+    expect(root.getAttribute('title')).toBe('Saitenhieb 2h 2026-10-08')
     expect(root.children).toHaveLength(list.length)
   })
 
@@ -107,7 +119,13 @@ describe('forScore setlist', () => {
 })
 
 describe('share link', () => {
-  const state = { targetSeconds: 7200, bufferSeconds: 45, halfLifeMonths: 18, list }
+  const state = {
+    targetSeconds: 7200,
+    bufferSeconds: 45,
+    halfLifeMonths: 18,
+    list,
+    lineup: ['dave', 'martin', 'torsten', 'peter', 'markus'],
+  }
 
   it('survives a round trip', () => {
     const back = decodeShare(encodeShare(state, data), data)!
@@ -151,9 +169,20 @@ describe('share link', () => {
   it('refuses a missing, foreign or empty hash', () => {
     expect(decodeShare('', data)).toBeNull()
     expect(decodeShare('#', data)).toBeNull()
-    expect(decodeShare('#v2~120~30~12~0.1', data)).toBeNull()
-    expect(decodeShare('#v1~120~30~12~', data)).toBeNull()
+    expect(decodeShare('#v9~120~30~12~0.1', data)).toBeNull()
+    expect(decodeShare('#v2~120~30~12~', data)).toBeNull()
     expect(decodeShare('#irgendwas', data)).toBeNull()
+  })
+
+  it('carries the lineup and reads an old link as the whole band', () => {
+    const thin = { ...state, lineup: ['martin', 'markus'] }
+    expect(decodeShare(encodeShare(thin, data), data)!.lineup).toEqual(['martin', 'markus'])
+    const whole = ['dave', 'martin', 'torsten', 'peter', 'markus']
+    expect(decodeShare(encodeShare(state, data), data)!.lineup).toEqual(whole)
+    // v1 links were written before the sheet existed.
+    expect(decodeShare('#v1~120~30~12~0.1', data)!.lineup).toEqual(whole)
+    // Nobody selected is a valid state: the filter is simply off.
+    expect(decodeShare(encodeShare({ ...state, lineup: [] }, data), data)!.lineup).toEqual([])
   })
 
   it('skips song indices that no longer exist', () => {

@@ -18,9 +18,11 @@ Sprache der Oberfläche: Deutsch. Eine Seite, keine Logins, kein Backend.
 |---|---|
 | Stack | Vite + TypeScript, Vanilla DOM (kein Framework). Vitest für die Logik. |
 | Hosting | GitHub Pages über GitHub Action (`.github/workflows/deploy.yml`). `base` in `vite.config.ts` auf den Repo-Namen setzen. |
-| Daten | `public/data.json`, erzeugt von `scripts/parse_forscore.py`. Wird committet. |
+| Daten | `public/data.json`, erzeugt von `scripts/parse_forscore.py` (forScore-Backup) und ergänzt von `scripts/merge_roster.py` (`data/roster.csv`). Wird committet. |
 | Datenschutz | Gigs tragen nur Datum und Reihenfolge, **keine Namen**. Das forScore-Backup (`data/forscore/*.4sb`) ist gitignored und darf **nie** committet werden (enthält Gig-Namen und Notenbilder). |
-| Spielzeiten | 1 h, 1,5 h, 2 h, 2,5 h, 3 h (Buttons). Spielzeit = Songlängen + Puffer pro Song (Default 30 s, einstellbar 0–90 s). Keine Pausenplanung. |
+| Spielzeiten | Frei einstellbar: Regler 30–300 min plus Zahlenfeld 10–420 min und ±5-min-Tasten. Spielzeit = Songlängen + Puffer pro Song (Default 30 s, einstellbar 0–90 s). Keine Pausenplanung. |
+| Besetzung | Auswahl der anwesenden Mitglieder (Dave, Martin, Torsten, Peter, Markus; Mario spielt Cajon und steht nicht im Sheet). Default alle. Ein Song wird nur gezogen, wenn die Anwesenden **Gesang und Gitarre** abdecken; Bass ist optional. Niemand ausgewählt = kein Filter. |
+| Ausgemusterte Songs | `NOCH AKTIV? = 0` im Sheet: nicht im Generator-Pool, aber über „Song einfügen" weiter auffindbar. |
 | Gewichtung | Abklingend: Gewicht eines Gigs = `0.5 ** (alter_in_monaten / halbwertszeit)`, Halbwertszeit Default 12 Monate, per Regler 3–36 Monate einstellbar. |
 | Nachrücken | Score aus Position **und** Nachbarn (siehe Algorithmus). |
 | Manuell einfügen | Suche im Song-Pool **oder** Freitext (dann ohne Statistik, Dauer Default 3:45, editierbar). |
@@ -32,12 +34,17 @@ Sprache der Oberfläche: Deutsch. Eine Seite, keine Logins, kein Backend.
 {
   "generated": "2026-10-08",
   "source": "Backup_2026-10-08.4sb",
+  "roster": "roster.csv",
+  "members": [ { "id": "dave", "name": "Dave" } ],   // Reihenfolge wie im Sheet
   "songs": [
-    { "id": "Avicii - Wake me up",      // = forScore-Dateiname ohne .pdf, stabil
-      "file": "Avicii - Wake me up.pdf", // für den .4ss-Export
+    { "id": "Avicii - Wake me up",      // = forScore-Dateiname ohne .pdf, stabil, NFD
+      "file": "Avicii - Wake me up.pdf", // für den .4ss-Export; "" = nur im Sheet
       "title": "Wake me up", "artist": "Avicii",
-      "duration": 247,                   // Sekunden, null wenn in forScore nicht gepflegt (3 Songs)
-      "plays": 62 }                      // ungewichtet, nur zur Anzeige
+      "duration": 247,                   // Sekunden, null wenn nicht gepflegt
+      "plays": 62,                       // ungewichtet, nur zur Anzeige
+      "active": true,                    // false = ausgemustert, nicht im Pool
+      "roles": { "dave": "G(V)",         // was wer bei dem Song macht, s. roster.ts
+                 "markus": "B" } }       // null = kein Sheet-Eintrag, kein Filter
   ],
   "gigs": [
     { "id": "001", "date": "2023-02-13", "songs": ["George Ezra - Blame it on Me", "..."] }
@@ -45,9 +52,18 @@ Sprache der Oberfläche: Deutsch. Eine Seite, keine Logins, kein Backend.
 }
 ```
 
-113 Songs im Pool (106 davon je gespielt), 63 Gigs. Alle Statistiken werden
-**im Browser** aus `gigs` berechnet, damit Halbwertszeit und Puffer live wirken.
-Nichts vorberechnen, was von Reglern abhängt.
+171 Songs insgesamt, davon 92 aktiv (der Generator-Pool), 63 Gigs. 112 Songs
+kommen aus dem forScore-Backup, 59 kennt nur das Sheet (`file: ""`, keine
+Statistik, Export als `<placeholder>`). 21 forScore-Songs stehen nicht im Sheet
+(`roles: null`) und werden deshalb nie wegen der Besetzung gefiltert.
+
+Alle Statistiken werden **im Browser** aus `gigs` berechnet, damit Halbwertszeit
+und Puffer live wirken. Nichts vorberechnen, was von Reglern abhängt. Die
+Besetzung filtert nur den Kandidatenkreis — die Gewichte kommen immer aus allen
+Gigs, egal wer beim nächsten dabei ist.
+
+Ids sind durchgehend NFD (macOS-Dateinamen). Der Sheet-Export ist NFC,
+`merge_roster.py` normalisiert ergänzte Ids deshalb auf NFD.
 
 ## Algorithmus
 
@@ -84,6 +100,9 @@ kein weiterer Pop-Faktor. Werte in Tests gegen die Erwartung prüfen:
 3. In der Session rausgekickte Songs kommen nicht automatisch wieder (Blockliste,
    sichtbar und per Klick aufhebbar).
 4. Songs ohne Dauer (`null`) zählen mit 225 s und werden in der UI markiert.
+5. Nur Songs mit `active !== false`, die die gewählte Besetzung abdeckt
+   (`isEligible()` in `roster.ts`). Gepinnte und Freitext-Songs bleiben stehen,
+   auch wenn die Besetzung sie nicht spielen kann — sie bekommen ein Warn-Badge.
 
 ### Generieren
 
@@ -137,9 +156,11 @@ Nachrücken nie verdrängt. Pins per Klick lösbar.
   Pool-Songs als `<score path=file>`, Freitext-Songs als `<placeholder>`.
   Download als Blob mit MIME `application/octet-stream`, Dateiname
   `Saitenhieb_<Dauer>_<Datum>.4ss`.
-- **Teilen-Link**: Zustand in `location.hash`: Song-IDs komprimiert (z. B.
-  Index in der alphabetischen Pool-Liste, base64url), Freitext-Songs inline als
-  `t:<titel>|<artist>|<sek>`, plus Puffer und Halbwertszeit. Beim Laden mit Hash
+- **Teilen-Link**: Zustand in `location.hash`:
+  `v2~<min>~<puffer>~<halbwertszeit>~<songs>~<besetzung>`. Song-IDs komprimiert
+  (Index in der alphabetischen Pool-Liste, base36), Freitext-Songs inline als
+  `t:<titel>|<artist>|<sek>`, Besetzung als Member-Indizes. `v1`-Links (ohne
+  Besetzung) werden noch gelesen und als „ganze Band“ verstanden. Beim Laden mit Hash
   die Liste wiederherstellen statt zu generieren.
 - **Druck**: Print-Stylesheet, nur die nummerierte Liste groß und kontrastreich,
   Kopfzeile mit Datum und Gesamtzeit, keine Buttons.
@@ -149,9 +170,14 @@ Nachrücken nie verdrängt. Pins per Klick lösbar.
 - Mobile first, läuft auf iPhone/iPad in der Probe. Großes Touch-Ziel je Zeile
   (≥ 44 px), Swipe-nach-links = rauskicken wäre schön, ist aber optional.
 - Dunkles Farbschema als Default (Bühne), helles per `prefers-color-scheme`.
-- Oberer Bereich: Spielzeit-Buttons, „Generieren“, „Neu würfeln“; aufklappbar
-  „Einstellungen“ mit Puffer- und Halbwertszeit-Regler. Darunter die Liste.
-  Unten (sticky) die Zeitanzeige und die Export-Buttons.
+- Oberer Bereich: Spielzeit (Regler + Zahlenfeld + ±5), Besetzungs-Chips,
+  „Generieren“, „Neu würfeln“; aufklappbar „Einstellungen“ mit Puffer- und
+  Halbwertszeit-Regler. Darunter die Liste. Unten (sticky) die Zeitanzeige und
+  die Export-Buttons. Unter der Liste: die rausgekickten Songs und aufklappbar
+  „Besetzung schließt N Songs aus“ mit Grund je Song.
+- Besetzungs-Chips: anwesend = durchgezogener Rand in Akzentfarbe, abwesend =
+  gestrichelt und gedimmt. Beim Umschalten werden nur die Songs ersetzt, die die
+  neue Besetzung nicht spielen kann — die Liste wird nicht neu gewürfelt.
 - Keine UI-Bibliothek. Eine CSS-Datei mit Custom Properties.
 - Kein Tracking, keine externen Requests außer dem eigenen `data.json`.
 
@@ -167,6 +193,7 @@ Nachrücken nie verdrängt. Pins per Klick lösbar.
 ├── src/
 │   ├── main.ts              # Bootstrap, State, Rendering
 │   ├── data.ts              # Laden + Typen für data.json
+│   ├── roster.ts            # Rollen-Kürzel, Besetzungs-Filter (reine Funktionen)
 │   ├── stats.ts             # Gewichte, pos/trans-Tabellen (reine Funktionen)
 │   ├── scorer.ts            # score(), generate(), replaceAt(), alternatives()
 │   ├── export.ts            # text, 4ss, share-link, print
@@ -175,6 +202,8 @@ Nachrücken nie verdrängt. Pins per Klick lösbar.
 ├── tests/                   # Vitest: stats, scorer, export (4ss ist valides XML)
 ├── public/data.json
 ├── scripts/parse_forscore.py
+├── scripts/merge_roster.py  # CSV -> active/roles/members in data.json
+├── data/roster.csv          # Sheet-Export "ZUM FILTERN", committet
 ├── data/forscore/           # gitignored, hier liegt das .4sb
 └── .github/workflows/deploy.yml
 ```
@@ -183,8 +212,20 @@ Nachrücken nie verdrängt. Pins per Klick lösbar.
 
 1. Neues forScore-Backup (Backups-Panel → Backup erstellen, **ohne** Dateien,
    reicht) nach `data/forscore/` legen.
-2. `python3 scripts/parse_forscore.py` → schreibt `public/data.json`.
-3. Committen und pushen, die Action deployt.
+2. Wenn sich im Google-Sheet etwas geändert hat: Blatt **ZUM FILTERN** als CSV
+   exportieren (Datei → Herunterladen → CSV) und als `data/roster.csv` ablegen.
+3. `python3 scripts/parse_forscore.py` → schreibt `public/data.json` und ruft
+   `merge_roster.py` gleich mit auf. Beide Skripte sind idempotent.
+4. Die Ausgabe durchlesen: sie listet die Songs, die das Skript **nicht**
+   zuordnen konnte. Taucht da ein Song auf, der in beiden Quellen steht, gehört
+   er in `ALIASES` oben in `merge_roster.py`.
+5. Committen und pushen, die Action deployt.
+
+`merge_roster.py` ordnet Sheet-Zeilen und forScore-Songs über Titel- und
+Artist-Ähnlichkeit zu (`MIN_SCORE`, `MIN_LEAD`), weil die Schreibweisen
+auseinandergehen („Kompliment" ↔ „Sportfreunde Stiller - Ein Kompliment").
+`python3 scripts/merge_roster.py --report` zeigt die Zuordnung, ohne zu
+schreiben.
 
 Das Skript existiert bereits und ist getestet. Es filtert nach dem
 `composer`-Feld `Saitenhieb` (so sind die Band-Songs in forScore markiert),
@@ -193,7 +234,7 @@ anonymisiert. Nicht umschreiben, höchstens erweitern.
 
 ## Arbeitsweise
 
-- Zuerst `stats.ts` und `scorer.ts` mit Tests, dann UI. Die Logik muss ohne DOM
+- Zuerst `stats.ts`, `scorer.ts` und `roster.ts` mit Tests, dann UI. Die Logik muss ohne DOM
   testbar sein.
 - Jeden Schritt mit `npm run build` prüfen; vor dem ersten Push ein lokales
   `npm run preview` auf dem Handy testen.
@@ -207,4 +248,12 @@ anonymisiert. Nicht umschreiben, höchstens erweitern.
 ## Offene Punkte (vom Nutzer zu entscheiden, bis dahin Default)
 
 - GitHub-Repo-Name/URL → steht in `git remote -v`; `base` daraus ableiten.
+- Die Seite ist öffentlich und nennt die Vornamen der Band. Wenn das stören
+  sollte: Initialen in `data/roster.csv` (Zeile 3, Spalten T–X) eintragen.
+- 21 forScore-Songs fehlen im Sheet und entkommen damit dem Besetzungsfilter
+  (u. a. „Uncle Kracker - Follow Me“ mit 23 Gigs). Die Liste steht in der
+  Ausgabe von `merge_roster.py`.
+- „Easy“ führt forScore unter Faith No More, das Sheet unter Lionel Richie;
+  `ALIASES` behandelt beide als denselben Song. Falls das zwei verschiedene
+  Arrangements sind: Eintrag aus `ALIASES` entfernen.
 - Eigene Domain später via CNAME möglich, erst mal `<user>.github.io/<repo>/`.

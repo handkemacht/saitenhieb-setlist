@@ -100,7 +100,8 @@ describe('buildStats on the real history', () => {
   const stats = buildStats(data, { halfLifeMonths: 12 })
 
   it('covers the whole pool minus the never-played songs', () => {
-    expect(data.songs).toHaveLength(112)
+    // 112 songs from the forScore backup plus 59 that only the sheet knows.
+    expect(data.songs).toHaveLength(171)
     expect(data.gigs).toHaveLength(63)
     expect(stats.played).toHaveLength(105)
   })
@@ -123,9 +124,11 @@ describe('buildStats on the real history', () => {
 
   it('keeps the ids byte-identical to the forScore file names (NFD)', () => {
     // The .4ss export names the file, so ids must never be re-normalised.
+    // Songs that only exist in the sheet have no file and export as a
+    // placeholder instead.
     for (const song of data.songs) {
       expect(song.id.normalize('NFD')).toBe(song.id)
-      expect(song.file).toBe(`${song.id}.pdf`)
+      if (song.file) expect(song.file).toBe(`${song.id}.pdf`)
     }
     const accented = data.songs.filter((song) => song.id.normalize('NFC') !== song.id)
     expect(accented.length).toBeGreaterThan(0)

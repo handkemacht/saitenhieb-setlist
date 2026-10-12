@@ -16,7 +16,37 @@
           <small id="source">Setlist aus der Gig-Historie</small>
         </h1>
 
-        <div class="targets" id="targets" role="group" aria-label="Spielzeit"></div>
+        <div class="target">
+          <label for="target-range">Spielzeit <b id="target-value">2 h</b></label>
+          <input
+            type="range"
+            id="target-range"
+            min="30"
+            max="300"
+            step="5"
+            value="120"
+          />
+          <div class="target-fine">
+            <button type="button" id="target-minus" aria-label="5 Minuten kürzer">−5</button>
+            <input
+              type="number"
+              id="target-minutes"
+              min="10"
+              max="420"
+              step="1"
+              value="120"
+              aria-label="Spielzeit in Minuten"
+            />
+            <span class="unit">min</span>
+            <button type="button" id="target-plus" aria-label="5 Minuten länger">+5</button>
+          </div>
+        </div>
+
+        <div class="lineup">
+          <label id="lineup-label">Besetzung</label>
+          <div class="chips" id="lineup-chips" role="group" aria-labelledby="lineup-label"></div>
+          <p class="hint" id="lineup-hint"></p>
+        </div>
 
         <div class="actions">
           <button type="button" id="generate" class="primary">Generieren</button>
@@ -48,6 +78,11 @@
         <h2>Rausgekickt – tippen, um wieder zuzulassen</h2>
         <div class="chips" id="blocked-chips"></div>
       </section>
+
+      <details class="blocked out" id="lineup-out" hidden>
+        <summary id="lineup-out-head"></summary>
+        <div class="chips" id="lineup-out-chips"></div>
+      </details>
     </div>
 
     <footer>

@@ -27,6 +27,8 @@ export interface SheetOptions {
   pool: Song[]
   /** Ids already in the list; they are shown but marked. */
   used: Set<string>
+  /** Extra note per song, e.g. "ausgemustert" or "kein Gesang". */
+  note?: (song: Song) => string | null
   onPick: (action: SlotAction) => void
 }
 
@@ -87,6 +89,7 @@ export function openSlotSheet(options: SheetOptions): void {
       formatDuration(duration(song)),
       song.plays > 0 ? `gespielt ${song.plays}×` : 'noch nie gespielt',
       options.used.has(song.id) ? 'schon in der Liste' : '',
+      options.note?.(song) ?? '',
     ]
       .filter(Boolean)
       .join(' · ')

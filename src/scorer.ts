@@ -30,6 +30,7 @@
  */
 
 import { artistName, duration, indexSongs, isCustomSongId, type SetlistData, type Song } from './data'
+import { isEligible } from './roster'
 import {
   afterShare,
   beforeShare,
@@ -87,10 +88,22 @@ export const DEFAULT_TUNING: ScoreTuning = {
 export interface ScoreContext {
   data: SetlistData
   stats: Stats
+  /** Every song in the data, including the ones the pool filter holds back. */
   songs: Map<string, Song>
   /** Pool ids in data order, the candidate universe. */
   poolIds: string[]
   tuning: ScoreTuning
+}
+
+export interface ContextOptions extends StatsOptions {
+  tuning?: Partial<ScoreTuning>
+  /**
+   * Member ids at the gig. Only songs this lineup can cover are drawn; an empty
+   * lineup turns the filter off. Retired songs are held back either way.
+   * See roster.ts. The statistics always use every gig — who is there changes
+   * what can be played, not what the band played in the past.
+   */
+  lineup?: Iterable<string>
 }
 
 export interface Candidate {
@@ -100,15 +113,13 @@ export interface Candidate {
   share: number
 }
 
-export function createContext(
-  data: SetlistData,
-  options: StatsOptions & { tuning?: Partial<ScoreTuning> } = {},
-): ScoreContext {
+export function createContext(data: SetlistData, options: ContextOptions = {}): ScoreContext {
+  const lineup = [...(options.lineup ?? [])]
   return {
     data,
     stats: buildStats(data, options),
     songs: indexSongs(data.songs),
-    poolIds: data.songs.map((song) => song.id),
+    poolIds: data.songs.filter((song) => isEligible(song, lineup)).map((song) => song.id),
     tuning: { ...DEFAULT_TUNING, ...options.tuning },
   }
 }

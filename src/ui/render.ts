@@ -11,6 +11,11 @@ export interface RowHandlers {
   onAppend: () => void
 }
 
+export interface RenderOptions {
+  /** Short warning for a row, e.g. "kein Gesang" for the current lineup. */
+  warning?: (item: SetlistEntry) => string | null
+}
+
 function element<K extends keyof HTMLElementTagNameMap>(
   tag: K,
   className?: string,
@@ -32,7 +37,12 @@ function iconButton(label: string, icon: string, pressed?: boolean): HTMLButtonE
   return button
 }
 
-function row(item: SetlistEntry, index: number, handlers: RowHandlers): HTMLLIElement {
+function row(
+  item: SetlistEntry,
+  index: number,
+  handlers: RowHandlers,
+  options: RenderOptions,
+): HTMLLIElement {
   const li = element('li', 'song')
   li.dataset.index = String(index)
   if (item.pinned) li.classList.add('pinned')
@@ -64,6 +74,11 @@ function row(item: SetlistEntry, index: number, handlers: RowHandlers): HTMLLIEl
   }
   if (item.filled) meta.append(element('span', 'badge filled', 'nachgerückt'))
   if (item.pinned) meta.append(element('span', 'badge', 'gepinnt'))
+  const warning = options.warning?.(item)
+  if (warning) {
+    meta.append(element('span', 'badge warn', warning))
+    li.classList.add('warn')
+  }
   li.append(meta)
 
   const actions = element('div', 'row-actions')
@@ -87,8 +102,9 @@ export function renderList(
   root: HTMLOListElement,
   list: SetlistEntry[],
   handlers: RowHandlers,
+  options: RenderOptions = {},
 ): void {
-  root.replaceChildren(...list.map((item, index) => row(item, index, handlers)))
+  root.replaceChildren(...list.map((item, index) => row(item, index, handlers, options)))
 }
 
 /** The dashed "add a song at the end" button below the list. */

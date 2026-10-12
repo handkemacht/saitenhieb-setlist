@@ -11,6 +11,7 @@ import {
   duration,
   formatDuration,
   isCustomSongId,
+  members,
   type SetlistData,
   type Song,
 } from './data'
@@ -23,16 +24,33 @@ import {
 } from './scorer'
 import { DEFAULT_HALF_LIFE_MONTHS } from './stats'
 
-/** Label for a target length: 5400 -> "1,5 h". */
+/**
+ * Label for a target length. The playing time is set in minutes, so only whole
+ * hours get the short form: 7200 -> "2 h", 5700 -> "1:35 h", 2700 -> "45 min".
+ */
 export function formatTarget(targetSeconds: number): string {
-  const hours = targetSeconds / 3600
-  return `${String(hours).replace('.', ',')} h`
+  const total = Math.max(0, Math.round(targetSeconds / 60))
+  if (total < 60) return `${total} min`
+  const hours = Math.floor(total / 60)
+  const rest = total % 60
+  return rest === 0 ? `${hours} h` : `${hours}:${String(rest).padStart(2, '0')} h`
+}
+
+/** The same length for a file name: "2h", "1h35", "45min". */
+export function targetSlug(targetSeconds: number): string {
+  const total = Math.max(0, Math.round(targetSeconds / 60))
+  if (total < 60) return `${total}min`
+  const hours = Math.floor(total / 60)
+  const rest = total % 60
+  return rest === 0 ? `${hours}h` : `${hours}h${String(rest).padStart(2, '0')}`
 }
 
 export interface ExportMeta {
   targetSeconds: number
   bufferSeconds: number
   date?: string
+  /** Members at the gig, for the headline. Omit to leave it out. */
+  lineup?: string[]
 }
 
 /** Today as YYYY-MM-DD. */
@@ -44,14 +62,18 @@ export function today(now = new Date()): string {
   ].join('-')
 }
 
-/** "Saitenhieb · 2 h · 28 Songs · 107 min (+Puffer 121 min)" */
+/** "Saitenhieb · 2 h · 28 Songs · 107 min (+Puffer 121 min) · Dave, Martin" */
 export function headline(list: SetlistEntry[], meta: ExportMeta): string {
   const pure = Math.round(songSeconds(list) / 60)
   const padded = Math.round(totalSeconds(list, meta.bufferSeconds) / 60)
-  return (
-    `Saitenhieb · ${formatTarget(meta.targetSeconds)} · ${list.length} Songs · ` +
-    `${pure} min (+Puffer ${padded} min)`
-  )
+  const parts = [
+    'Saitenhieb',
+    formatTarget(meta.targetSeconds),
+    `${list.length} Songs`,
+    `${pure} min (+Puffer ${padded} min)`,
+  ]
+  if (meta.lineup?.length) parts.push(meta.lineup.join(', '))
+  return parts.join(' · ')
 }
 
 /** The clipboard text: headline, then one numbered line per song. */
@@ -78,7 +100,7 @@ function escapeXml(value: string): string {
  * become a placeholder. See https://forscore.co/developers-file-types/
  */
 export function asForScore(list: SetlistEntry[], meta: ExportMeta): string {
-  const title = `Saitenhieb ${formatTarget(meta.targetSeconds)} ${meta.date ?? today()}`
+  const title = `Saitenhieb ${targetSlug(meta.targetSeconds)} ${meta.date ?? today()}`
   const rows = list.map((item) =>
     item.custom || !item.song.file
       ? `  <placeholder title="${escapeXml(item.song.title)}"/>`
@@ -95,33 +117,55 @@ export function asForScore(list: SetlistEntry[], meta: ExportMeta): string {
 
 /** "Saitenhieb_2h_2026-10-08.4ss" */
 export function forScoreFileName(meta: ExportMeta): string {
-  const hours = formatTarget(meta.targetSeconds).replace(/[ ,]/g, (match) =>
-    match === ',' ? '-' : '',
-  )
-  return `Saitenhieb_${hours}_${meta.date ?? today()}.4ss`
+  return `Saitenhieb_${targetSlug(meta.targetSeconds)}_${meta.date ?? today()}.4ss`
 }
 
 // --- share link ------------------------------------------------------------
 
 /**
  * Hash layout, all parts separated by "~":
- *   v1 ~ <target in minutes> ~ <buffer s> ~ <half-life months> ~ <songs>
+ *   v2 ~ <target in minutes> ~ <buffer s> ~ <half-life months> ~ <songs> ~ <lineup>
  * Songs are separated by "." and are either an index into the alphabetical
  * pool (base36) or a free-text song as "t:<title>|<artist>|<seconds>".
- * A trailing "!" marks a pinned entry.
+ * A trailing "!" marks a pinned entry. The lineup is the member indices from
+ * data.members as base36 digits, "0134" for everyone but the third.
+ *
+ * v1 links carry no lineup and are read as "the whole band".
  */
-const HASH_VERSION = 'v1'
+const HASH_VERSION = 'v2'
+const READABLE_VERSIONS = new Set(['v1', 'v2'])
 
 export interface ShareState {
   targetSeconds: number
   bufferSeconds: number
   halfLifeMonths: number
   list: SetlistEntry[]
+  /** Member ids at the gig. */
+  lineup: string[]
 }
 
 /** The pool in a stable alphabetical order — the index is the share-link id. */
 export function poolOrder(data: SetlistData): Song[] {
   return [...data.songs].sort((a, b) => a.id.localeCompare(b.id, 'de'))
+}
+
+function encodeLineup(lineup: string[], data: SetlistData): string {
+  const ids = members(data).map((member) => member.id)
+  return lineup
+    .map((id) => ids.indexOf(id))
+    .filter((index) => index >= 0)
+    .sort((a, b) => a - b)
+    .map((index) => index.toString(36))
+    .join('')
+}
+
+function decodeLineup(raw: string | undefined, data: SetlistData): string[] {
+  const ids = members(data).map((member) => member.id)
+  // A v1 link, or a v2 link written before the band had a roster: whole band.
+  if (raw === undefined) return ids
+  return [...raw]
+    .map((digit) => ids[Number.parseInt(digit, 36)])
+    .filter((id): id is string => id !== undefined)
 }
 
 function encodeField(value: string): string {
@@ -144,6 +188,7 @@ export function encodeShare(state: ShareState, data: SetlistData): string {
     state.bufferSeconds,
     state.halfLifeMonths,
     parts.join('.'),
+    encodeLineup(state.lineup, data),
   ].join('~')
 }
 
@@ -151,8 +196,8 @@ export function encodeShare(state: ShareState, data: SetlistData): string {
 export function decodeShare(hash: string, data: SetlistData): ShareState | null {
   const raw = hash.replace(/^#/, '')
   if (!raw) return null
-  const [version, minutes, buffer, halfLife, songs] = raw.split('~')
-  if (version !== HASH_VERSION || !songs) return null
+  const [version, minutes, buffer, halfLife, songs, lineup] = raw.split('~')
+  if (!version || !READABLE_VERSIONS.has(version) || !songs) return null
 
   const pool = poolOrder(data)
   const list: SetlistEntry[] = []
@@ -180,6 +225,7 @@ export function decodeShare(hash: string, data: SetlistData): ShareState | null 
     bufferSeconds: Number.isFinite(Number(buffer)) ? Number(buffer) : DEFAULT_BUFFER_SECONDS,
     halfLifeMonths: Number(halfLife) || DEFAULT_HALF_LIFE_MONTHS,
     list,
+    lineup: decodeLineup(lineup, data),
   }
 }
 

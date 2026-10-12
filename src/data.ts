@@ -15,6 +15,23 @@ export interface Song {
   duration: number | null
   /** Unweighted play count, for display only. */
   plays: number
+  /**
+   * False for songs the band has retired ("NOCH AKTIV?" = 0 in the sheet).
+   * Retired songs stay searchable but are never drawn. Undefined counts as true.
+   */
+  active?: boolean
+  /**
+   * Member id -> what that member does on this song ("GV(B)"), from the band's
+   * sheet. null when the sheet has no row for the song, undefined in test data.
+   * See roster.ts for the codes.
+   */
+  roles?: Record<string, string> | null
+}
+
+/** One band member who can be at a gig. Mario plays cajon and is not listed. */
+export interface Member {
+  id: string
+  name: string
 }
 
 export interface Gig {
@@ -28,6 +45,10 @@ export interface Gig {
 export interface SetlistData {
   generated: string
   source: string
+  /** File name of the roster export the song data was merged with. */
+  roster?: string
+  /** Selectable members, in sheet order. Empty in test data. */
+  members?: Member[]
   songs: Song[]
   gigs: Gig[]
 }
@@ -78,6 +99,11 @@ export function indexSongs(songs: Song[]): Map<string, Song> {
   return new Map(songs.map((song) => [song.id, song]))
 }
 
+/** Members of the band, or an empty list when the data carries none. */
+export function members(data: SetlistData): Member[] {
+  return data.members ?? []
+}
+
 /** Creates a song object for a free-text entry that is not in the pool. */
 export function customSong(
   title: string,
@@ -91,6 +117,8 @@ export function customSong(
     artist,
     duration: seconds,
     plays: 0,
+    // A free-text song carries no sheet row, so no lineup rule applies to it.
+    roles: null,
   }
 }
 

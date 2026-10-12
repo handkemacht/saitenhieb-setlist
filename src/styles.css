@@ -109,15 +109,87 @@ button:disabled {
 
 /* --- top controls -------------------------------------------------------- */
 
-.targets {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 6px;
+.target,
+.lineup {
   margin: 0.75rem 0;
 }
 
-.targets button {
-  padding: 0 0.25rem;
+.target > label,
+.lineup > label {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.target > label b {
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.target input[type='range'] {
+  width: 100%;
+  height: var(--tap);
+  accent-color: var(--accent);
+}
+
+/* Minus, the exact number of minutes, plus. */
+.target-fine {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: -0.25rem;
+}
+
+.target-fine button {
+  min-width: var(--tap);
+  padding: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.target-fine input[type='number'] {
+  width: 5.5rem;
+  min-height: var(--tap);
+  padding: 0 0.6rem;
+  text-align: right;
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.target-fine .unit {
+  margin-right: auto;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.lineup > label {
+  margin-bottom: 0.4rem;
+}
+
+.lineup .chips button {
+  min-height: var(--tap);
+  padding: 0 0.9rem;
+  color: var(--muted);
+  border-style: dashed;
+}
+
+/* Present: solid outline and full contrast. Absent: dashed and dimmed. */
+.lineup .chips button.on {
+  color: var(--text);
+  background: var(--surface-high);
+  border-style: solid;
+  border-color: var(--accent);
+}
+
+.lineup .hint {
+  margin: 0.4rem 0 0;
+  font-size: 0.8rem;
+  color: var(--muted);
 }
 
 .actions {
@@ -309,6 +381,16 @@ li.song.pinned {
   color: var(--accent);
 }
 
+.badge.warn {
+  color: var(--bad);
+  background: transparent;
+  border: 1px solid currentColor;
+}
+
+li.song.warn .handle {
+  color: var(--bad);
+}
+
 .row-actions {
   grid-column: 3;
   grid-row: 1 / span 2;
@@ -356,11 +438,31 @@ li.song.pinned {
   margin: 1rem 0 0;
 }
 
-.blocked h2 {
+.blocked h2,
+.blocked > summary {
   font-size: 0.8rem;
   color: var(--muted);
   font-weight: 400;
   margin: 0 0 0.4rem;
+}
+
+details.blocked.out > summary {
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* The lineup list is read-only — spans, not buttons. */
+.chips span {
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 0.6rem;
+  font-size: 0.8rem;
+  border-radius: 999px;
+  color: var(--muted);
+  border: 1px solid var(--line);
 }
 
 .chips {
@@ -617,7 +719,8 @@ input[type='search'] {
     padding: 0;
   }
 
-  header .targets,
+  header .target,
+  header .lineup,
   header .actions,
   details.settings,
   footer,

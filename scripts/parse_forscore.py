@@ -24,6 +24,9 @@ Containerformat (reverse-engineered, forScore 14/15):
 import sys, re, json, gzip, plistlib, glob, os, collections, unicodedata
 from datetime import date
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import merge_roster
+
 BAND_COMPOSER = "Saitenhieb"          # composer-Feld, an dem die Band erkannt wird
 EXCLUDE_FILES = {                      # Spezialdateien, die keine echten Songs sind
     "Münchener Freiheit - Ohne dich_DAVE.pdf",
@@ -143,6 +146,13 @@ def main():
         json.dump(out, fh, ensure_ascii=False, indent=1)
     print(f"{len(songs)} Songs ({len(used)} je gespielt), {len(gigs)} Gigs "
           f"{gigs[0]['date']} bis {gigs[-1]['date']} -> public/data.json")
+
+    # Besetzung und "noch aktiv?" stehen nicht im Backup, sondern im Sheet-Export.
+    if os.path.exists(merge_roster.ROSTER_CSV):
+        print()
+        merge_roster.main()
+    else:
+        print(f"Hinweis: {merge_roster.ROSTER_CSV} fehlt - ohne Besetzungsdaten")
 
 if __name__ == "__main__":
     main()
