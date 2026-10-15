@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-11",
+ "generated": "2026-10-15",
  "source": "Backup_2026-10-08.4sb",
  "roster": "roster.csv",
  "members": [
@@ -180,7 +180,7 @@
     "dave": "GV(B)",
     "martin": "G",
     "torsten": "V",
-    "peter": "GV",
+    "peter": "G",
     "markus": "B"
    }
   },
@@ -223,6 +223,7 @@
    "roles": {
     "dave": "G(V)",
     "martin": "GV",
+    "peter": "G",
     "markus": "B"
    }
   },
@@ -298,7 +299,7 @@
     "martin": "GV",
     "torsten": "V",
     "peter": "GV",
-    "markus": "B"
+    "markus": "Batst"
    }
   },
   {
@@ -1176,7 +1177,7 @@
    "roles": {
     "dave": "GV(B)",
     "martin": "G",
-    "peter": "GV",
+    "peter": "G",
     "markus": "B"
    }
   },
@@ -1405,7 +1406,7 @@
    "plays": 1,
    "active": false,
    "roles": {
-    "dave": "GV yomaha",
+    "dave": "GV",
     "martin": "G"
    }
   },

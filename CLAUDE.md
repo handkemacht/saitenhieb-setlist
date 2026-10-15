@@ -18,7 +18,7 @@ Sprache der Oberfläche: Deutsch. Eine Seite, keine Logins, kein Backend.
 |---|---|
 | Stack | Vite + TypeScript, Vanilla DOM (kein Framework). Vitest für die Logik. |
 | Hosting | GitHub Pages über GitHub Action (`.github/workflows/deploy.yml`). `base` in `vite.config.ts` auf den Repo-Namen setzen. |
-| Daten | `public/data.json`, erzeugt von `scripts/parse_forscore.py` (forScore-Backup) und ergänzt von `scripts/merge_roster.py` (`data/roster.csv`). Wird committet. |
+| Daten | `public/data.json`, erzeugt von `scripts/parse_forscore.py` (forScore-Backup) und ergänzt von `scripts/merge_roster.py` (Band-Sheet). Wird committet. |
 | Datenschutz | Gigs tragen nur Datum und Reihenfolge, **keine Namen**. Das forScore-Backup (`data/forscore/*.4sb`) ist gitignored und darf **nie** committet werden (enthält Gig-Namen und Notenbilder). |
 | Spielzeiten | Frei einstellbar: Regler 30–300 min plus Zahlenfeld 10–420 min und ±5-min-Tasten. Spielzeit = Songlängen + Puffer pro Song (Default 30 s, einstellbar 0–90 s). Keine Pausenplanung. |
 | Besetzung | Auswahl der anwesenden Mitglieder (Dave, Martin, Torsten, Peter, Markus; Mario spielt Cajon und steht nicht im Sheet). Default alle. Ein Song wird nur gezogen, wenn die Anwesenden **Gesang und Gitarre** abdecken; Bass ist optional. Niemand ausgewählt = kein Filter. |
@@ -203,7 +203,7 @@ Nachrücken nie verdrängt. Pins per Klick lösbar.
 ├── public/data.json
 ├── scripts/parse_forscore.py
 ├── scripts/merge_roster.py  # CSV -> active/roles/members in data.json
-├── data/roster.csv          # Sheet-Export "ZUM FILTERN", committet
+├── data/roster.csv          # Kopie des Blatts "Setlist", committet und diffbar
 ├── data/forscore/           # gitignored, hier liegt das .4sb
 └── .github/workflows/deploy.yml
 ```
@@ -212,20 +212,31 @@ Nachrücken nie verdrängt. Pins per Klick lösbar.
 
 1. Neues forScore-Backup (Backups-Panel → Backup erstellen, **ohne** Dateien,
    reicht) nach `data/forscore/` legen.
-2. Wenn sich im Google-Sheet etwas geändert hat: Blatt **ZUM FILTERN** als CSV
-   exportieren (Datei → Herunterladen → CSV) und als `data/roster.csv` ablegen.
-3. `python3 scripts/parse_forscore.py` → schreibt `public/data.json` und ruft
-   `merge_roster.py` gleich mit auf. Beide Skripte sind idempotent.
-4. Die Ausgabe durchlesen: sie listet die Songs, die das Skript **nicht**
-   zuordnen konnte. Taucht da ein Song auf, der in beiden Quellen steht, gehört
-   er in `ALIASES` oben in `merge_roster.py`.
+2. `python3 scripts/parse_forscore.py` → schreibt `public/data.json` und ruft
+   `merge_roster.py` gleich mit auf.
+3. Hat sich das Band-Sheet geändert, die Arbeitsmappe dazugeben:
+   `python3 scripts/merge_roster.py ~/Downloads/Songs_Setlist-Saitenhieb.xlsx`
+   Das Skript liest das Blatt **Setlist** direkt aus der `.xlsx`, schreibt
+   `data/roster.csv` als diffbare Kopie mit und aktualisiert `public/data.json`.
+   Die Arbeitsmappe selbst wird nicht committet, die CSV schon.
+4. Die Ausgabe durchlesen. Sie meldet drei Dinge:
+   - Songs, die das Skript **nicht** zuordnen konnte. Steht so einer in beiden
+     Quellen, gehört er in `ALIASES` oben in `merge_roster.py`.
+   - **unbekannte Kürzel** — alles, was nicht nur aus G/V/B und Klammern
+     besteht, ist im Sheet ein Tippfehler.
+   - forScore-Songs ohne Sheet-Eintrag, die dem Besetzungsfilter entkommen.
 5. Committen und pushen, die Action deployt.
 
-`merge_roster.py` ordnet Sheet-Zeilen und forScore-Songs über Titel- und
-Artist-Ähnlichkeit zu (`MIN_SCORE`, `MIN_LEAD`), weil die Schreibweisen
-auseinandergehen („Kompliment" ↔ „Sportfreunde Stiller - Ein Kompliment").
-`python3 scripts/merge_roster.py --report` zeigt die Zuordnung, ohne zu
-schreiben.
+Beide Skripte sind idempotent; zweimal laufen lassen ändert nichts.
+
+`merge_roster.py` sucht seine Spalten über die **Überschrift**, nicht über die
+Position — das Sheet hat die Spalten schon einmal verschoben. Steht ein
+Mitgliedsname mehrfach in der Kopfzeile, gilt die letzte Spalte. Zeilen und
+forScore-Songs ordnet es über Titel- und Artist-Ähnlichkeit zu (`MIN_SCORE`,
+`MIN_LEAD`), weil die Schreibweisen auseinandergehen („Kompliment" ↔
+„Sportfreunde Stiller - Ein Kompliment"). `--report` zeigt die Zuordnung, ohne
+zu schreiben. Die `.xlsx` liest es mit der Standardbibliothek (ZIP + XML),
+damit der Workflow ohne Installation auskommt.
 
 Das Skript existiert bereits und ist getestet. Es filtert nach dem
 `composer`-Feld `Saitenhieb` (so sind die Band-Songs in forScore markiert),
