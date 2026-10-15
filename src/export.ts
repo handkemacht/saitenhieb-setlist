@@ -248,12 +248,8 @@ export async function copyText(text: string): Promise<void> {
   field.remove()
 }
 
-export function download(
-  content: BlobPart,
-  fileName: string,
-  type = 'application/octet-stream',
-): void {
-  const blob = new Blob([content], { type })
+export function download(content: string, fileName: string): void {
+  const blob = new Blob([content], { type: 'application/octet-stream' })
   const url = URL.createObjectURL(blob)
   const link = document.createElement('a')
   link.href = url

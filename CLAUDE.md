@@ -26,7 +26,7 @@ Sprache der Oberfläche: Deutsch. Eine Seite, keine Logins, kein Backend.
 | Gewichtung | Abklingend: Gewicht eines Gigs = `0.5 ** (alter_in_monaten / halbwertszeit)`, Halbwertszeit Default 12 Monate, per Regler 3–36 Monate einstellbar. |
 | Nachrücken | Score aus Position **und** Nachbarn (siehe Algorithmus). |
 | Manuell einfügen | Suche im Song-Pool **oder** Freitext (dann ohne Statistik, Dauer Default 3:45, editierbar). |
-| Export | Text kopieren, forScore-Setlist (`.4ss`), OnSong-Binder (`.onsongbinder`), Teilen-Link (Setlist in URL-Hash), Druckansicht (Print-CSS). |
+| Export | Text kopieren, forScore-Setlist (`.4ss`) laden, Teilen-Link (Setlist in URL-Hash), Druckansicht (Print-CSS). |
 
 ## Datenmodell (`public/data.json`)
 
@@ -156,32 +156,6 @@ Nachrücken nie verdrängt. Pins per Klick lösbar.
   Pool-Songs als `<score path=file>`, Freitext-Songs als `<placeholder>`.
   Download als Blob mit MIME `application/octet-stream`, Dateiname
   `Saitenhieb_<Dauer>_<Datum>.4ss`.
-- **OnSong-Binder (.onsongbinder)**: ZIP nach der offiziellen Spezifikation
-  (https://onsongapp.com/developers/onsong-binder/). Aufbau:
-
-  ```
-  manifest.json                                    das Set ($binder.class "Set")
-  songs/<ID>/manifest.json                         ein Song je Ordner
-  songs/<ID>/attachments/<ID>/manifest.json
-  songs/<ID>/attachments/<ID>/<slug>.txt           das Chart
-  ```
-
-  Die Reihenfolge steht in `$binder.songs` des Set-Manifests. Ids kommen aus
-  `stableId()` (aus der Song-Id abgeleitet, nicht zufällig), damit zweimal
-  Exportieren dieselbe Datei ergibt. `duration` in Sekunden, `null` wenn
-  forScore keine hat.
-
-  **Grenze des Formats:** OnSong kennt keinen dokumentierten Weg, ein Set auf
-  Songs zu verweisen, die schon in der Bibliothek liegen — ein Binder bringt
-  seine Songs immer mit. Dieser Export hat die Noten nicht (die liegen als PDF
-  in forScore), er schreibt deshalb pro Song ein kurzes Chart mit Titel,
-  Artist, Dauer und dem forScore-Dateinamen. Beim Import entstehen also neue
-  Song-Einträge. Wer die Noten will, hängt sie in OnSong selbst an.
-
-  Der ZIP-Writer in `zip.ts` ist selbst geschrieben und speichert ohne
-  Kompression — ein Binder sind ein paar Dutzend kleine JSON-Dateien, dafür
-  lohnt keine Deflate-Implementierung.
-
 - **Teilen-Link**: Zustand in `location.hash`:
   `v2~<min>~<puffer>~<halbwertszeit>~<songs>~<besetzung>`. Song-IDs komprimiert
   (Index in der alphabetischen Pool-Liste, base36), Freitext-Songs inline als
@@ -223,12 +197,9 @@ Nachrücken nie verdrängt. Pins per Klick lösbar.
 │   ├── stats.ts             # Gewichte, pos/trans-Tabellen (reine Funktionen)
 │   ├── scorer.ts            # score(), generate(), replaceAt(), alternatives()
 │   ├── export.ts            # text, 4ss, share-link, print
-│   ├── onsong.ts            # OnSong-Binder (.onsongbinder)
-│   ├── zip.ts               # minimaler ZIP-Writer, nur für den Binder
 │   ├── ui/                  # DOM-Rendering, Drag & Drop, Suche
 │   └── styles.css
-├── tests/                   # Vitest: stats, scorer, roster, export (4ss ist
-│                            # valides XML, der Binder ein lesbares ZIP)
+├── tests/                   # Vitest: stats, scorer, export (4ss ist valides XML)
 ├── public/data.json
 ├── scripts/parse_forscore.py
 ├── scripts/merge_roster.py  # CSV -> active/roles/members in data.json
@@ -285,7 +256,4 @@ anonymisiert. Nicht umschreiben, höchstens erweitern.
 - „Easy“ führt forScore unter Faith No More, das Sheet unter Lionel Richie;
   `ALIASES` behandelt beide als denselben Song. Falls das zwei verschiedene
   Arrangements sind: Eintrag aus `ALIASES` entfernen.
-- Der OnSong-Binder ist gegen die Spezifikation und die Beispieldatei von
-  OnSong gebaut, aber nie in OnSong selbst importiert worden. Wenn jemand in
-  der Band OnSong hat: einmal ausprobieren und melden, ob das Set ankommt.
 - Eigene Domain später via CNAME möglich, erst mal `<user>.github.io/<repo>/`.

@@ -28,7 +28,6 @@ import {
   totalSeconds,
   type SetlistEntry,
 } from './scorer'
-import { asOnSongBinder, BINDER_MIME, onSongFileName } from './onsong'
 import {
   coverage,
   isActive,
@@ -467,15 +466,6 @@ async function main(): Promise<void> {
       const info = { ...meta(), date: today() }
       download(asForScore(state.list, info), forScoreFileName(info))
       toast('forScore-Setlist geladen')
-    }),
-  )
-
-  $('onsong').addEventListener(
-    'click',
-    guard(() => {
-      const info = { ...meta(), date: today() }
-      download(asOnSongBinder(state.list, info), onSongFileName(info), BINDER_MIME)
-      toast('OnSong-Binder geladen')
     }),
   )
 
